@@ -7,11 +7,11 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // Local imports
-import App from "./App";
-import rootReducer from "./reducers";
+import App from "App";
+import rootReducer from "reducers";
 
 // Assets
-import "./index.css";
+import "index.css";
 
 const store = createStore(
   rootReducer,

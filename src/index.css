@@ -84,6 +84,9 @@ h6 {
 .header span {
   color: #4b0082;
   font-size: 3.5vh;
+  font-weight: 800;
+  letter-spacing: 7px;
+  margin: 0 auto;
 }
 .header a {
   color: black;
@@ -92,4 +95,10 @@ h6 {
 }
 .header a:hover {
   color: #7fffd4;
+}
+[class*="__container"] {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
 }
