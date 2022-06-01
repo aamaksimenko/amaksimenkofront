@@ -1,17 +1,11 @@
 import React from "react";
-import Users from "components/Users";
-import News from "components/News";
+import News from "./components/News";
 
 function App() {
   return (
-    <header class="header">
-      <div class="header__container">
-        <span>News</span>
-        <a href="/">Home page</a>
-        <Users />
-        <News />
-      </div>
-    </header>
+    <div>
+      <News posts={[1, 2, 3]} />
+    </div>
   );
 }
 

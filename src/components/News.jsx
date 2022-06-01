@@ -1,5 +1,6 @@
 import React from "react";
+import OneNews from "./OneNews";
 
-export default function News() {
-  return <a href="/">News Component</a>;
+export default function News({ posts }) {
+  return posts.map((post) => <OneNews post={post} key={post.toString()} />);
 }
