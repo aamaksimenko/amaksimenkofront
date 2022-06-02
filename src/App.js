@@ -1,12 +1,8 @@
 import React from "react";
-import News from "./components/News";
+import MainPage from "./components/MainPage";
 
 function App() {
-  return (
-    <div>
-      <News posts={[1, 2, 3]} />
-    </div>
-  );
+  return <MainPage />;
 }
 
 export default App;

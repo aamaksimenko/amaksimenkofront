@@ -20,10 +20,8 @@ export const getNewsFailure = () => ({
 export function fetchNews() {
   return async (dispatch) => {
     dispatch(getNews());
-
     try {
       let data = [];
-
       await axios
         .get("http://127.0.0.1:3001/news", {
           headers: {
@@ -32,7 +30,6 @@ export function fetchNews() {
         })
         .then((resp) => {
           data = resp.data;
-          console.log(data);
         });
 
       dispatch(getNewsSuccess(data));

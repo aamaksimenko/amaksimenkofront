@@ -11,7 +11,7 @@ export default function newsReducer(state = initialState, action) {
     case actions.GET_NEWS:
       return { ...state, loading: true };
     case actions.GET_NEWS_SUCCESS:
-      return { posts: action.payload, loading: false, hasErrors: false };
+      return { news: action.payload, loading: false, hasErrors: false };
     case actions.GET_NEWS_FAILURE:
       return { ...state, loading: false, hasErrors: true };
     default:
