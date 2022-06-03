@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import OneNews from "./OneNews";
 import { fetchNews } from "../actions/newsActions";
 
-export default function News() {
+export default React.memo(function News() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.news);
   useEffect(() => {
@@ -23,4 +23,4 @@ export default function News() {
       key={post.id}
     />
   ));
-}
+});

@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function OneNews({ title, article, tag, author, created_at }) {
+export default React.memo(function OneNews({
+  title,
+  article,
+  tag,
+  author,
+  created_at,
+}) {
   return (
     <div className="news">
       <h2 className="news__title">{title}</h2>
@@ -18,4 +24,4 @@ export default function OneNews({ title, article, tag, author, created_at }) {
       </div>
     </div>
   );
-}
+});

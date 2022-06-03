@@ -2,7 +2,7 @@ import React from "react";
 import News from "./News";
 import Header from "./Header";
 
-export default function OneNews({ post }) {
+export default React.memo(function OneNews({ post }) {
   return (
     <div className="wrapper">
       <Header />
@@ -15,4 +15,4 @@ export default function OneNews({ post }) {
       </div>
     </div>
   );
-}
+});
