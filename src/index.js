@@ -1,27 +1,19 @@
 // External imports
 import React from "react";
-import { render } from "react-dom";
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-
 // Local imports
 import App from "App";
-import rootReducer from "reducers";
+import { store } from "./store";
 
 // Assets
 import "index.css";
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
 );
-
-const page = (
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
-
-render(page, document.getElementById("root"));

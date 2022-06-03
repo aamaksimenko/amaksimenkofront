@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Header() {
   return (
-    <header class="header">
-      <div class="header__container">
+    <header className="header">
+      <div className="header__container">
         <div className="header__home">
           <a href="/">NEWS</a>
         </div>
