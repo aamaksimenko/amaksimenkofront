@@ -2,7 +2,7 @@ import React, { memo } from "react";
 
 import "./index.css";
 
-export default memo(function Header() {
+function Header() {
   return (
     <header className="header">
       <div className="header__container">
@@ -20,4 +20,6 @@ export default memo(function Header() {
       </div>
     </header>
   );
-});
+}
+
+export default memo(Header);

@@ -7,7 +7,7 @@ export const initialState = {
   hasErrors: false,
 };
 
-export default function newsReducer(state = initialState, action) {
+function newsReducer(state = initialState, action) {
   switch (action.type) {
     case GET_NEWS:
       return {
@@ -30,3 +30,5 @@ export default function newsReducer(state = initialState, action) {
       return state;
   }
 }
+
+export default newsReducer;

@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import News from "../components/News/News";
 import "./index.css";
 
-export default memo(function OneNews({ post }) {
+function OneNews({ post }) {
   return (
     <div className="wrapper">
       <div className="content">
@@ -15,4 +15,6 @@ export default memo(function OneNews({ post }) {
       </div>
     </div>
   );
-});
+}
+
+export default memo(OneNews);

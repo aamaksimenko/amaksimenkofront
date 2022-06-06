@@ -2,13 +2,7 @@ import React, { memo } from "react";
 
 import "./index.css";
 
-export default memo(function OneNews({
-  title,
-  article,
-  tag,
-  author,
-  created_at,
-}) {
+function OneNews({ title, article, tag, author, created_at }) {
   return (
     <div className="news">
       <h2 className="news__title">{title}</h2>
@@ -26,4 +20,6 @@ export default memo(function OneNews({
       </div>
     </div>
   );
-});
+}
+
+export default memo(OneNews);
