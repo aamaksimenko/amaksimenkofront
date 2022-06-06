@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 
-import "../Header/index.css";
+import "./index.css";
 
 export default memo(function Header() {
   return (

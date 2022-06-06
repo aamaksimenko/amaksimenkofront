@@ -1,5 +1,6 @@
 import React, { useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import OneNews from "../OneNews/OneNews";
 import { getNews } from "../../redux/actions/newsActions";
 

@@ -1,5 +1,7 @@
 import React, { memo } from "react";
 
+import "./index.css";
+
 export default memo(function OneNews({
   title,
   article,
