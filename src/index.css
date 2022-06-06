@@ -130,6 +130,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .header__menu a:hover {
   color: #7fffd4;
 }
+
 .posts {
   display: flex;
   flex-wrap: wrap;

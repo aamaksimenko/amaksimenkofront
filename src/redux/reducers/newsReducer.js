@@ -1,4 +1,5 @@
-import * as actions from "../actions/newsActions";
+// import * as actions from "../actions/newsActions";
+import { GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE } from "../constants";
 
 export const initialState = {
   news: [],
@@ -8,18 +9,18 @@ export const initialState = {
 
 export default function newsReducer(state = initialState, action) {
   switch (action.type) {
-    case actions.GET_NEWS:
+    case GET_NEWS:
       return {
         ...state,
         loading: true,
       };
-    case actions.GET_NEWS_SUCCESS:
+    case GET_NEWS_SUCCESS:
       return {
         news: action.payload,
         loading: false,
         hasErrors: false,
       };
-    case actions.GET_NEWS_FAILURE:
+    case GET_NEWS_FAILURE:
       return {
         ...state,
         loading: false,

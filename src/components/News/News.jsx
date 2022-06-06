@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import OneNews from "./OneNews";
-import { fetchNews } from "../actions/newsActions";
+import OneNews from "../OneNews/OneNews";
+import { getNews } from "../../redux/actions/newsActions";
 
-export default React.memo(function News() {
+export default memo(function News() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.news);
+
   useEffect(() => {
-    dispatch(fetchNews());
-  }, []);
+    dispatch(getNews());
+  }, [dispatch]);
 
   if (!posts.length) {
     return <div className="not_news">No news</div>;

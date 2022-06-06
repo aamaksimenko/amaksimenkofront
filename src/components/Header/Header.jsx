@@ -1,6 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default React.memo(function Header() {
+import "../Header/index.css";
+
+export default memo(function Header() {
   return (
     <header className="header">
       <div className="header__container">

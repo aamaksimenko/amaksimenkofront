@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default React.memo(function OneNews({
+export default memo(function OneNews({
   title,
   article,
   tag,

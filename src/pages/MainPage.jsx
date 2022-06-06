@@ -1,8 +1,9 @@
-import React from "react";
-import News from "./News";
-import Header from "./Header";
+import React, { memo } from "react";
 
-export default React.memo(function OneNews({ post }) {
+import News from "../components/News/News";
+import Header from "../components/Header/Header";
+
+export default memo(function OneNews({ post }) {
   return (
     <div className="wrapper">
       <Header />
