@@ -1,7 +1,7 @@
-import React, { memo } from "react";
+import React, { memo } from 'react';
 
-import News from "../components/News/News";
-import "./index.css";
+import News from '../components/News/News';
+import './index.css';
 
 function OneNews({ post }) {
   return (

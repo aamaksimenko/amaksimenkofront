@@ -1,8 +1,8 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from 'redux-saga/effects';
 
-import api from "../actions/api/api";
-import { GET_NEWS } from "../constants";
-import { getNewsSuccess, getNewsFailure } from "../actions/newsActions";
+import api from '../actions/api/api';
+import { GET_NEWS } from '../constants';
+import { getNewsSuccess, getNewsFailure } from '../actions/newsActions';
 
 function* getAllNews() {
   try {

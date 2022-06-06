@@ -1,8 +1,8 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import MainPage from "./pages/MainPage";
-import Header from "components/Header/Header";
+import MainPage from './pages/MainPage';
+import Header from './components/Header/Header';
 
 function App() {
   return (

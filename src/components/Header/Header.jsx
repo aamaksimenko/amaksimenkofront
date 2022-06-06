@@ -1,6 +1,6 @@
-import React, { memo } from "react";
+import React, { memo } from 'react';
 
-import "./index.css";
+import './index.css';
 
 function Header() {
   return (

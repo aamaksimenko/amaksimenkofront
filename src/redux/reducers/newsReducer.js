@@ -1,4 +1,4 @@
-import { GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE } from "../constants";
+import { GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE } from '../constants';
 
 export const initialState = {
   news: [],
@@ -6,7 +6,7 @@ export const initialState = {
   hasErrors: false,
 };
 
-function newsReducer(state = initialState, action) {
+function newsReducer(action, state = initialState) {
   switch (action.type) {
     case GET_NEWS:
       return {

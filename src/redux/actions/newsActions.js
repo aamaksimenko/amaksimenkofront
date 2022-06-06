@@ -1,4 +1,4 @@
-import { GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE } from "redux/constants";
+import { GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE } from '../constants';
 
 export const getNews = () => ({
   type: GET_NEWS,
