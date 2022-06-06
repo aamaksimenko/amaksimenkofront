@@ -1,4 +1,3 @@
-// import * as actions from "../actions/newsActions";
 import { GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE } from "../constants";
 
 export const initialState = {
