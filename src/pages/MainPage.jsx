@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// import { Grid } from '@mui/material';
 
 import OneNews from '../components/OneNews/OneNews';
 // import InfoBlock from '../components/InfoBlock/InfoBlock';
@@ -20,7 +21,7 @@ function MainPage() {
   // }
 
   return (
-    <>
+    <div className="main-page">
       {news.map((post) => (
         <OneNews
           key={post.id}
@@ -31,8 +32,7 @@ function MainPage() {
           CreatedAt={post.created_at}
         />
       ))}
-      ,
-    </>
+    </div>
   );
 }
 
