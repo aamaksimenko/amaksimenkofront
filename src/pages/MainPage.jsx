@@ -1,16 +1,39 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import News from '../components/News/News';
+import OneNews from '../components/OneNews/OneNews';
+// import InfoBlock from '../components/InfoBlock/InfoBlock';
+import { getNews } from '../redux/actions/newsActions';
 import './index.css';
 
-function OneNews({ post }) {
+function MainPage() {
+  const dispatch = useDispatch();
+
+  const { news } = useSelector((state) => state.newsReducer);
+
+  useEffect(() => {
+    dispatch(getNews());
+  }, [dispatch]);
+
+  // if (!news.length) {
+  //   return <InfoBlock />;
+  // }
+
   return (
-    <div className="wrapper">
-      <div className="content__container posts">
-        <News />
-      </div>
-    </div>
+    <>
+      {news.map((post) => (
+        <OneNews
+          key={post.id}
+          title={post.title}
+          article={post.article}
+          tag={post.tag}
+          author={post.author}
+          CreatedAt={post.created_at}
+        />
+      ))}
+      ,
+    </>
   );
 }
 
-export default memo(OneNews);
+export default memo(MainPage);

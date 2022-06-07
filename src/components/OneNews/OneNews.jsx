@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
-// import * as PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 import './index.css';
 
 function OneNews({
-  title, article, tag, author, created_at,
+  title, article, tag, author, CreatedAt,
 }) {
   return (
     <div className="news">
@@ -21,21 +21,19 @@ function OneNews({
         <div className="info__created">
           <span>{author}</span>
           <br />
-          <span>{created_at}</span>
+          <span>{CreatedAt}</span>
         </div>
       </div>
     </div>
   );
 }
 
-// OneNews.propTypes = {
-//   newsContent: PropTypes.shape({
-//     title: PropTypes.string.isRequired,
-//     article: PropTypes.string.isRequired,
-//     tag: PropTypes.string.isRequired,
-//     author: PropTypes.string.isRequired,
-//     created_at: PropTypes.string.isRequired,
-//   }).isRequired,
-// };
+OneNews.propTypes = {
+  title: PropTypes.string.isRequired,
+  article: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  CreatedAt: PropTypes.string.isRequired,
+};
 
 export default memo(OneNews);

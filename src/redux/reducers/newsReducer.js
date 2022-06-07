@@ -2,28 +2,29 @@ import { GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE } from '../constants';
 
 export const initialState = {
   news: [],
-  loading: false,
-  hasErrors: false,
+  isLoading: false,
+  error: null,
 };
 
-function newsReducer(action, state = initialState) {
+function newsReducer(state = initialState, action = {}) {
   switch (action.type) {
     case GET_NEWS:
       return {
         ...state,
-        loading: true,
+        isLoading: true,
       };
     case GET_NEWS_SUCCESS:
       return {
+        ...state,
         news: action.payload,
-        loading: false,
-        hasErrors: false,
+        isLoading: false,
+        error: null,
       };
     case GET_NEWS_FAILURE:
       return {
         ...state,
-        loading: false,
-        hasErrors: true,
+        isLoading: false,
+        error: action.payload,
       };
     default:
       return state;

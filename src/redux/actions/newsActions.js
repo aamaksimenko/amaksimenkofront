@@ -4,9 +4,9 @@ export const getNews = () => ({
   type: GET_NEWS,
 });
 
-export const getNewsSuccess = (news) => ({
+export const getNewsSuccess = (payload) => ({
   type: GET_NEWS_SUCCESS,
-  payload: news,
+  payload,
 });
 
 export const getNewsFailure = () => ({

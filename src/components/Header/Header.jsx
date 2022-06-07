@@ -10,7 +10,7 @@ function Header() {
           <a href="/">NEWS</a>
         </div>
         <div className="header__search">
-          <button className="header__button">Search</button>
+          <button type="submit" className="header__button">Search</button>
           <input type="search" className="header__input" />
         </div>
         <nav className="header__menu">
