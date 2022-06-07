@@ -49,3 +49,15 @@ input[type="search"]::-webkit-search-results-decoration {
 .header__menu a:hover {
   color: #7fffd4;
 }
+input{
+  border: 2px solid black;
+}
+
+.submit {
+  border: none;
+  border-radius: 10px;
+  background-color: greenyellow;
+  outline: none;
+  margin-top: 50px;
+  padding: 5px;
+}
