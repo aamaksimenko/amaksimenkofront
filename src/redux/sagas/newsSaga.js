@@ -6,7 +6,7 @@ import { getNewsSuccess, getNewsFailure } from '../actions/newsActions';
 
 function* getAllNews() {
   try {
-    const { data } = yield call(api.get);
+    const { data } = yield call(api.get, '/news');
     yield put(getNewsSuccess(data));
   } catch (error) {
     yield put(getNewsFailure());

@@ -4,22 +4,23 @@ import './index.css';
 
 function Modal({ active, setActive, children }) {
   return (
-    /* eslint-disable */
+  /* eslint-disable */
     <div className={active ? 'modal active' : 'modal'} onClick={() => setActive(false)}>
-      <div className="modal__content" onClick={e => e.stopPropagation()}>
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         {active}
         {setActive}
-        {children}  
+        {children}
       </div>
     </div>
-    /* eslint-enable */
+
+   
   );
 }
 
 Modal.propTypes = {
-  active: PropTypes.string.isRequired,
-  setActive: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
+  setActive: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
 };
-
+ /* eslint-enable */
 export default memo(Modal);
