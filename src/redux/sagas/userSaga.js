@@ -2,25 +2,24 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 import api from '../actions/api/api';
 import { POST_USER } from '../constants';
-import { getNewsSuccess, getNewsFailure } from '../actions/newsActions';
+import { postUserSuccess, postUserFailure } from '../actions/actionCreator';
 
-function* regUserNews() {
+function* regUser(name, email, password, passwordConfirmation) {
   try {
-    const { data } = yield call(api.post, '/news', {
+    const { data } = yield call(api.post, '/users', {
       user: {
-        name: 'Andrew',
-        login: 'andrew_one',
-        email: 'amaksimenko@dunice2.net',
-        password: 'password',
-        password_confirmation: 'password',
+        name,
+        email,
+        password,
+        password_confirmation: passwordConfirmation,
       },
     });
-    yield put(getNewsSuccess(data));
+    yield put(postUserSuccess(data));
   } catch (error) {
-    yield put(getNewsFailure());
+    yield put(postUserFailure());
   }
 }
-function* listenerNewsSaga() {
-  yield takeEvery(POST_USER, regUserNews);
+function* listenerUserSaga() {
+  yield takeEvery(POST_USER, regUser);
 }
-export default listenerNewsSaga;
+export default listenerUserSaga;

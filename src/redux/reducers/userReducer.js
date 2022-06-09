@@ -1,22 +1,24 @@
 import { POST_USER, POST_USER_SUCCESS, POST_USER_FAILURE } from '../constants';
 
-export const initialState = {
-  news: [],
+export const initialUserState = {
+  user: [],
   isLoading: false,
   error: null,
 };
 
-function userReducer(state = initialState, action = {}) {
+function userReducer(state = initialUserState, action = {}) {
   switch (action.type) {
     case POST_USER:
       return {
         ...state,
+        user: action.payload,
         isLoading: true,
+        error: null,
       };
     case POST_USER_SUCCESS:
       return {
         ...state,
-        news: action.payload,
+        user: action.payload,
         isLoading: false,
         error: null,
       };

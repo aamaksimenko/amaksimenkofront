@@ -11,12 +11,14 @@ export const getNewsSuccess = (payload) => ({
   payload,
 });
 
-export const getNewsFailure = () => ({
+export const getNewsFailure = (error) => ({
   type: GET_NEWS_FAILURE,
+  error,
 });
 
-export const postUser = () => ({
+export const postUser = (payload) => ({
   type: POST_USER,
+  payload,
 });
 
 export const postUserSuccess = (payload) => ({
@@ -24,6 +26,7 @@ export const postUserSuccess = (payload) => ({
   payload,
 });
 
-export const postUserFailure = () => ({
+export const postUserFailure = (error) => ({
   type: POST_USER_FAILURE,
+  error,
 });

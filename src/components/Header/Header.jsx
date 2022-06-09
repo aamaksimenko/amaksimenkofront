@@ -1,15 +1,17 @@
 import React, { memo, useState } from 'react';
-import {
-  Box, TextField, Button,
-} from '@mui/material/';
+// import {
+//   Box, TextField, Button,
+// } from '@mui/material/';
 
-import Modal from '../Modal/Modal';
+// import Modal from '../Modal/Modal';
+
+import LogIn from '../LogIn/LogIn';
 import './index.css';
+import Registration from '../Registration/Registration';
 
 function Header() {
-  const [modalActiveIn, setModalActiveIn] = useState(false);
-  const [modalActiveReg, setModalActiveReg] = useState(false);
-
+  const [loginState, setLoginState] = useState(false);
+  const [regState, setRegState] = useState(false);
   return (
     <header className="header">
       <div className="header__container">
@@ -21,68 +23,12 @@ function Header() {
           <input type="search" className="header__input" />
         </div>
         <nav className="header__menu">
-          <button id="sign-in" type="button" onClick={() => setModalActiveIn(true)}>Sign in</button>
-          <button id="out" type="button" onClick={() => setModalActiveReg(true)}>Registration</button>
+          <button id="sign-in" type="button" onClick={() => setLoginState(true)}>Sign in</button>
+          <button id="out" type="button" onClick={() => setRegState(true)}>Registration</button>
         </nav>
       </div>
-      <Modal active={modalActiveIn} setActive={setModalActiveIn}>
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <h2>Sign in</h2>
-          <div className="log-form">
-
-            <div className="log-form__field">
-              <p>Email</p>
-              <TextField fullWidth required id="email" label="Email" />
-            </div>
-
-            <div className="log-form__field">
-              <p>Password</p>
-              <TextField fullWidth required id="password" label="Password" type="password" autoComplete="current-password" />
-            </div>
-            <div className="log-form__field">
-              <div id="in"><Button>Sign in</Button></div>
-              <div id="cls"><Button onClick={() => setModalActiveIn(false)}>Close</Button></div>
-            </div>
-          </div>
-        </Box>
-      </Modal>
-      <Modal active={modalActiveReg} setActive={setModalActiveReg}>
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <h2>Registration form</h2>
-          <div className="reg-form">
-            <div className="reg-form__field">
-              <p>Name</p>
-              <TextField fullWidth required id="name" label="Name" />
-            </div>
-            <div className="reg-form__field">
-              <p>Email</p>
-              <TextField fullWidth required id="email" label="Email" />
-            </div>
-            <div className="reg-form__field">
-              <p>Password</p>
-              <TextField fullWidth required id="password" label="Password" type="password" autoComplete="current-password" />
-            </div>
-            <div className="reg-form__field">
-              <div id="reg"><Button>Registration</Button></div>
-              <div id="cls"><Button onClick={() => setModalActiveReg(false)}>Close</Button></div>
-            </div>
-          </div>
-        </Box>
-      </Modal>
+      <LogIn modalActiveIn={loginState} setModalActiveIn={setLoginState} />
+      <Registration modalActiveReg={regState} setModalActiveReg={setRegState} />
     </header>
   );
 }
