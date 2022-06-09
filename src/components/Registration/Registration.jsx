@@ -15,7 +15,7 @@ function Registration({ modalActiveReg, setModalActiveReg }) {
       <h2>Registration form</h2>
       <Formik
         initialValues={{
-          name: '', email: '', password: '', confirmPassword: '',
+          name: '', email: '', password: '', confirm_password: '',
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -26,7 +26,7 @@ function Registration({ modalActiveReg, setModalActiveReg }) {
             .required('No password provided.')
             .min(6, 'Password is too short - should be 8 chars minimum.')
             .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
-          confirmPassword: Yup.string()
+          confirm_password: Yup.string()
             .oneOf([Yup.ref('password')], 'Passwords don\'t match')
             .required('Required'),
         })}
@@ -62,8 +62,8 @@ function Registration({ modalActiveReg, setModalActiveReg }) {
           <h3>Confirm password</h3>
           {/* <label htmlFor="password_c">Confirm password</label> */}
           <br />
-          <Field type="password" id="password_c" name="confirmPassword" />
-          <ErrorMessage name="confirmPassword" component="div" />
+          <Field type="password" id="password_c" name="confirm_password" />
+          <ErrorMessage name="confirm_password" component="div" />
           <br />
 
           <button type="submit">Submit</button>
