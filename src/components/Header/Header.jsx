@@ -35,18 +35,18 @@ function Header() {
           autoComplete="off"
         >
           <h2>Sign in</h2>
-          <div className="reg-form">
+          <div className="log-form">
 
-            <div className="reg-form__field">
+            <div className="log-form__field">
               <p>Email</p>
               <TextField fullWidth required id="email" label="Email" />
             </div>
 
-            <div className="reg-form__field">
+            <div className="log-form__field">
               <p>Password</p>
               <TextField fullWidth required id="password" label="Password" type="password" autoComplete="current-password" />
             </div>
-            <div className="reg-form__field">
+            <div className="log-form__field">
               <div id="in"><Button>Sign in</Button></div>
               <div id="cls"><Button onClick={() => setModalActiveIn(false)}>Close</Button></div>
             </div>
