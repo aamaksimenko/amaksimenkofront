@@ -73,10 +73,6 @@ function Header() {
               <TextField fullWidth required id="email" label="Email" />
             </div>
             <div className="reg-form__field">
-              <p>Login</p>
-              <TextField fullWidth required id="login" label="Login" />
-            </div>
-            <div className="reg-form__field">
               <p>Password</p>
               <TextField fullWidth required id="password" label="Password" type="password" autoComplete="current-password" />
             </div>
