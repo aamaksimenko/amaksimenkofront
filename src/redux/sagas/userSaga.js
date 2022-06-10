@@ -6,8 +6,9 @@ import { postUserSuccess, postUserFailure } from '../actions/actionCreator';
 
 function* regUser(action) {
   try {
-    const { data } = yield call(api.post, '/users', action.payload);
+    const data = yield call(api.post, '/users', action.payload);
     yield put(postUserSuccess(data));
+    localStorage.setItem('token', data.headers.authorization);
   } catch (error) {
     yield put(postUserFailure());
   }

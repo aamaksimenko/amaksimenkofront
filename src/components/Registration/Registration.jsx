@@ -8,10 +8,6 @@ import * as Yup from 'yup';
 import { postUser } from '../../redux/actions/actionCreator';
 import Modal from '../Modal/Modal';
 import './registration.css';
-// .minLowercase(1, 'Password must contain at least 1 lower case letter')
-// .minUppercase(1, 'Password must contain at least 1 upper case letter')
-// .minNumbers(1, 'Password must contain at least 1 number'),
-// .oneOf([Yup.ref('password')], 'Passwords don\'t match')
 
 function Registration({ modalActiveReg, setModalActiveReg }) {
   const dispatch = useDispatch();

@@ -1,31 +1,56 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { memo } from 'react';
+// import { useDispatch } from 'react-redux';
 import * as PropTypes from 'prop-types';
-import { TextField, Button } from '@mui/material/';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import Modal from '../Modal/Modal';
 import './login.css';
 
 function LogIn({ modalActiveIn, setModalActiveIn }) {
+  // const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email('Invalid email address').required('Required'),
+      password: Yup.string()
+        .required('No password provided.')
+        .min(6, 'Password is too short - should be 8 chars minimum.'),
+    }),
+    onSubmit: (values) => {
+      const post = {
+        user: {
+          email: values.email,
+          password: values.password,
+        },
+      };
+      // dispatch();
+      alert(JSON.stringify(post, null, 2));
+    },
+  });
   return (
     <Modal active={modalActiveIn} setActive={setModalActiveIn}>
-      <form action="">
-        <h2>Sign in</h2>
-        <div className="log-form">
+      <h2>Registration form</h2>
+      <form onSubmit={formik.handleSubmit}>
 
-          <div className="log-form__field">
-            <p>Email</p>
-            <TextField fullWidth required id="email_in" label="Email" />
-          </div>
+        <h3>Email address</h3>
+        <input id="email" type="email" {...formik.getFieldProps('email')} />
+        {formik.touched.email && formik.errors.email ? (
+          <div>{formik.errors.email}</div>
+        ) : null}
 
-          <div className="log-form__field">
-            <p>Password</p>
-            <TextField fullWidth required id="password_in" label="Password" type="password" autoComplete="current-password" />
-          </div>
-          <div className="log-form__field">
-            <div id="in"><Button>Sign in</Button></div>
-            <div id="cls_in"><Button onClick={() => setModalActiveIn(false)}>Close</Button></div>
-          </div>
-        </div>
+        <h3>Password</h3>
+        <input id="password" type="password" {...formik.getFieldProps('password')} />
+        {formik.touched.password && formik.errors.password ? (
+          <div>{formik.errors.password}</div>
+        ) : null}
+
+        <br />
+        <button type="submit">Submit</button>
       </form>
     </Modal>
   );
