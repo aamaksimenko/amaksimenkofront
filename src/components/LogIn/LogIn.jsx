@@ -1,15 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { memo } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+import { postLogIn } from '../../redux/actions/actionCreator';
 import Modal from '../Modal/Modal';
 import './login.css';
 
 function LogIn({ modalActiveIn, setModalActiveIn }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -28,7 +29,7 @@ function LogIn({ modalActiveIn, setModalActiveIn }) {
           password: values.password,
         },
       };
-      // dispatch();
+      dispatch(postLogIn(post));
       alert(JSON.stringify(post, null, 2));
     },
   });

@@ -22,10 +22,18 @@ function Header() {
           <button type="submit" className="header__button">Search</button>
           <input type="search" className="header__input" />
         </div>
-        <nav className="header__menu">
-          <button id="sign-in" type="button" onClick={() => setLoginState(true)}>Sign in</button>
-          <button id="out" type="button" onClick={() => setRegState(true)}>Registration</button>
-        </nav>
+
+        {localStorage.token ? (
+          <nav className="header__menu">
+            <button id="sign-out" type="button">Log Out</button>
+            <button id="page" type="button">Profile</button>
+          </nav>
+        ) : (
+          <nav className="header__menu">
+            <button id="sign-in" type="button" onClick={() => setLoginState(true)}>Sign in</button>
+            <button id="out" type="button" onClick={() => setRegState(true)}>Registration</button>
+          </nav>
+        )}
       </div>
       <LogIn modalActiveIn={loginState} setModalActiveIn={setLoginState} />
       <Registration modalActiveReg={regState} setModalActiveReg={setRegState} />

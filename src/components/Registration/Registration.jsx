@@ -48,30 +48,31 @@ function Registration({ modalActiveReg, setModalActiveReg }) {
       <h2>Registration form</h2>
       <form onSubmit={formik.handleSubmit}>
         <h3>Name</h3>
-        <input id="name" type="text" {...formik.getFieldProps('name')} />
+        <input value="" id="name" type="text" {...formik.getFieldProps('name')} />
         {formik.touched.name && formik.errors.name ? (
           <div>{formik.errors.name}</div>
         ) : null}
 
         <h3>Email address</h3>
-        <input id="email" type="email" {...formik.getFieldProps('email')} />
+        <input value="" id="email" type="email" {...formik.getFieldProps('email')} />
         {formik.touched.email && formik.errors.email ? (
           <div>{formik.errors.email}</div>
         ) : null}
 
         <h3>Password</h3>
-        <input id="password" type="password" {...formik.getFieldProps('password')} />
+        <input value="" id="password" type="password" {...formik.getFieldProps('password')} />
         {formik.touched.password && formik.errors.password ? (
           <div>{formik.errors.password}</div>
         ) : null}
 
         <h3>Confirm password</h3>
-        <input id="confirmPassword" type="password" {...formik.getFieldProps('confirmPassword')} />
+        <input value="" id="confirmPassword" type="password" {...formik.getFieldProps('confirmPassword')} />
         {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
           <div>{formik.errors.confirmPassword}</div>
         ) : null}
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={() => setModalActiveReg(false)}>Submit</button>
+        <button type="button" onClick={() => setModalActiveReg(false)}>Close</button>
       </form>
     </Modal>
   );

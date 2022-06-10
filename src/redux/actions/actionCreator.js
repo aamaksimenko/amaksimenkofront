@@ -1,5 +1,6 @@
 import {
-  GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE, POST_USER, POST_USER_SUCCESS, POST_USER_FAILURE,
+  GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE, POST_USER, POST_USER_SUCCESS,
+  POST_USER_FAILURE, POST_LOGIN, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE,
 } from '../constants';
 
 export const getNews = () => ({
@@ -28,5 +29,20 @@ export const postUserSuccess = (payload) => ({
 
 export const postUserFailure = (error) => ({
   type: POST_USER_FAILURE,
+  error,
+});
+
+export const postLogIn = (payload) => ({
+  type: POST_LOGIN,
+  payload,
+});
+
+export const postLogInSuccess = (payload) => ({
+  type: POST_LOGIN_SUCCESS,
+  payload,
+});
+
+export const postLogInFailure = (error) => ({
+  type: POST_LOGIN_FAILURE,
   error,
 });
