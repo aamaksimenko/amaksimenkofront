@@ -12,6 +12,8 @@ import Registration from '../Registration/Registration';
 function Header() {
   const [loginState, setLoginState] = useState(false);
   const [regState, setRegState] = useState(false);
+  const logOut = () => localStorage.clear();
+  const token = localStorage.getItem('token');
   return (
     <header className="header">
       <div className="header__container">
@@ -23,9 +25,9 @@ function Header() {
           <input type="search" className="header__input" />
         </div>
 
-        {localStorage.token ? (
+        {token ? (
           <nav className="header__menu">
-            <button id="sign-out" type="button">Log Out</button>
+            <button id="sign-out" type="button" onClick={logOut}>Log Out</button>
             <button id="page" type="button">Profile</button>
           </nav>
         ) : (

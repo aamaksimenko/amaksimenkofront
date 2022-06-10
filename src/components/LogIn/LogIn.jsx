@@ -30,7 +30,6 @@ function LogIn({ modalActiveIn, setModalActiveIn }) {
         },
       };
       dispatch(postLogIn(post));
-      alert(JSON.stringify(post, null, 2));
     },
   });
   return (
@@ -51,7 +50,8 @@ function LogIn({ modalActiveIn, setModalActiveIn }) {
         ) : null}
 
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit" onClick={() => setModalActiveIn(false)}>Submit</button>
+        <button type="button" onClick={() => setModalActiveIn(false)}>Close</button>
       </form>
     </Modal>
   );
