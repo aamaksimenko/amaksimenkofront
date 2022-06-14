@@ -1,9 +1,5 @@
 import React, { memo, useState } from 'react';
-// import {
-//   Box, TextField, Button,
-// } from '@mui/material/';
-
-// import Modal from '../Modal/Modal';
+import { useSelector } from 'react-redux';
 
 import LogIn from '../LogIn/LogIn';
 import './index.css';
@@ -12,8 +8,19 @@ import Registration from '../Registration/Registration';
 function Header() {
   const [loginState, setLoginState] = useState(false);
   const [regState, setRegState] = useState(false);
-  const logOut = () => localStorage.clear();
-  const token = localStorage.getItem('token');
+  const tokenReg = useSelector((state) => state.userReducer.isToken);
+  const tokenLog = useSelector((state) => state.logInReducer.token);
+  const [token, setToken] = useState(false);
+  const [isToken, setIsToken] = useState(false);
+  const logOut = () => {
+    localStorage.clear();
+    console.log(token);
+    console.log(isToken);
+    setToken(!token);
+    setIsToken(!isToken);
+    console.log(token);
+    console.log(isToken);
+  };
   return (
     <header className="header">
       <div className="header__container">
@@ -25,7 +32,7 @@ function Header() {
           <input type="search" className="header__input" />
         </div>
 
-        {token ? (
+        {(tokenReg || tokenLog) ? (
           <nav className="header__menu">
             <button id="sign-out" type="button" onClick={logOut}>Log Out</button>
             <button id="page" type="button">Profile</button>

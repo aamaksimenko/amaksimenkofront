@@ -13,7 +13,5 @@ const store = createStore(
   reducer,
   composeEnchancers(applyMiddleware(sagaMiddleware)),
 );
-console.log('store');
 sagaMiddleware.run(rootSaga);
-console.log('end');
 export default store;

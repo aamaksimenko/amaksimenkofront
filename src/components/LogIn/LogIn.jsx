@@ -34,24 +34,24 @@ function LogIn({ modalActiveIn, setModalActiveIn }) {
   });
   return (
     <Modal active={modalActiveIn} setActive={setModalActiveIn}>
-      <h2>Registration form</h2>
+      <h2 className="modal-title">Sign in</h2>
       <form onSubmit={formik.handleSubmit}>
+        <div className="form-div">
+          <h3>Email address</h3>
+          <input className="form-input" id="email_log" type="email" {...formik.getFieldProps('email')} />
+          {formik.touched.email && formik.errors.email ? (
+            <div>{formik.errors.email}</div>
+          ) : null}
 
-        <h3>Email address</h3>
-        <input id="email" type="email" {...formik.getFieldProps('email')} />
-        {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div>
-        ) : null}
-
-        <h3>Password</h3>
-        <input id="password" type="password" {...formik.getFieldProps('password')} />
-        {formik.touched.password && formik.errors.password ? (
-          <div>{formik.errors.password}</div>
-        ) : null}
-
-        <br />
-        <button type="submit" onClick={() => setModalActiveIn(false)}>Submit</button>
-        <button type="button" onClick={() => setModalActiveIn(false)}>Close</button>
+          <h3>Password</h3>
+          <input className="form-input" id="password_log" type="password" {...formik.getFieldProps('password')} />
+          {formik.touched.password && formik.errors.password ? (
+            <div>{formik.errors.password}</div>
+          ) : null}
+          <br />
+        </div>
+        <button type="submit" id="oneL" className="modal-button" onClick={() => setModalActiveIn(false)}>Submit</button>
+        <button type="button" id="twoL" className="modal-button" onClick={() => setModalActiveIn(false)}>Close</button>
       </form>
     </Modal>
   );

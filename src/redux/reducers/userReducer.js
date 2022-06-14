@@ -1,8 +1,11 @@
-import { POST_USER, POST_USER_SUCCESS, POST_USER_FAILURE } from '../constants';
+import {
+  POST_USER, POST_USER_SUCCESS, POST_USER_FAILURE, LOGOUT_SUCCESS, LOGOUT_FAILURE,
+} from '../constants';
 
 export const initialUser = {
   user: null,
   isLoading: false,
+  isToken: false,
   error: null,
 };
 
@@ -12,6 +15,7 @@ function userReducer(state = initialUser, action = {}) {
       return {
         ...state,
         isLoading: true,
+        isToken: false,
         error: null,
       };
     case POST_USER_SUCCESS:
@@ -19,12 +23,28 @@ function userReducer(state = initialUser, action = {}) {
         ...state,
         user: action.payload,
         isLoading: false,
+        isToken: true,
         error: null,
       };
     case POST_USER_FAILURE:
       return {
         ...state,
         isLoading: false,
+        isToken: false,
+        error: action.payload,
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        token: false,
+        error: action.payload,
+      };
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        token: true,
         error: action.payload,
       };
     default:

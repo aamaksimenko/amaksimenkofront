@@ -1,4 +1,6 @@
-import { POST_LOGIN, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE } from '../constants';
+import {
+  POST_LOGIN, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_FAILURE,
+} from '../constants';
 
 export const initialLogIn = {
   log_in: null,
@@ -29,6 +31,20 @@ function logInReducer(state = initialLogIn, action = {}) {
         ...state,
         isLoading: false,
         token: false,
+        error: action.payload,
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        token: false,
+        error: action.payload,
+      };
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        token: true,
         error: action.payload,
       };
     default:

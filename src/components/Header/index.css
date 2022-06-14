@@ -48,15 +48,37 @@ input[type="search"]::-webkit-search-results-decoration {
   color: #7FFFD4;
 }
 
-input{
-  border: 2px solid black;
+form {
+  text-align: center;
 }
 
-.submit {
-  border: none;
-  border-radius: 10px;
-  background-color: greenyellow;
-  outline: none;
-  margin-top: 50px;
-  padding: 5px;
+.modal-title{
+  text-align: center;
+  font-size: 50px;
+  margin: 0 0 10px 0;
 }
+
+.form-div{
+  height: 320px;
+}
+
+.form-div h3{
+  margin: 20px 0 0 0;
+  padding: 0;
+}
+
+.form-input{
+  border: 2px solid black;
+  height: 30px;
+  border-radius: 15px;
+  padding: 0 10px;
+}
+
+.modal-button {
+  border: 2px solid black;
+  height: 30px;
+  width: 100px;
+  border-radius: 15px;
+  margin: 0 10px 0 10px;
+}
+
