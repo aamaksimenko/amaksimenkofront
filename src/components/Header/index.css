@@ -58,10 +58,6 @@ form {
   margin: 0 0 10px 0;
 }
 
-.form-div{
-  height: 320px;
-}
-
 .form-div h3{
   margin: 20px 0 0 0;
   padding: 0;
@@ -79,6 +75,6 @@ form {
   height: 30px;
   width: 100px;
   border-radius: 15px;
-  margin: 0 10px 0 10px;
+  margin: 50px 10px 0 10px;
 }
 

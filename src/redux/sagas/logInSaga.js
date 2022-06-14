@@ -4,7 +4,7 @@ import api from '../actions/api/api';
 import { POST_LOGIN } from '../constants';
 import { postLogInSuccess, postLogInFailure } from '../actions/actionCreator';
 
-function* logUser(action) {
+function* logInUser(action) {
   try {
     const data = yield call(api.post, '/users/sign_in', action.payload);
     yield put(postLogInSuccess(data));
@@ -14,6 +14,6 @@ function* logUser(action) {
   }
 }
 function* listenerLogInUserSaga() {
-  yield takeEvery(POST_LOGIN, logUser);
+  yield takeEvery(POST_LOGIN, logInUser);
 }
 export default listenerLogInUserSaga;

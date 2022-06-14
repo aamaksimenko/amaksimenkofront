@@ -1,7 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
-import * as PropTypes from 'prop-types';
+import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -9,7 +8,7 @@ import { postUser } from '../../redux/actions/actionCreator';
 import Modal from '../Modal/Modal';
 import './registration.css';
 
-function Registration({ modalActiveReg, setModalActiveReg }) {
+function Registration({ isRegistration, setModalRegistration }) {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -43,7 +42,7 @@ function Registration({ modalActiveReg, setModalActiveReg }) {
     },
   });
   return (
-    <Modal active={modalActiveReg} setActive={setModalActiveReg}>
+    <Modal isActive={isRegistration} setActive={setModalRegistration}>
       <h2 className="modal-title">Registration form</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="form-div">
@@ -72,16 +71,21 @@ function Registration({ modalActiveReg, setModalActiveReg }) {
           ) : null}
           <br />
         </div>
-        <button type="submit" id="oneR" className="modal-button" onClick={() => setModalActiveReg(false)}>Submit</button>
-        <button type="button" id="twoR" className="modal-button" onClick={() => setModalActiveReg(false)}>Close</button>
+        <button type="submit" id="oneR" className="modal-button" onClick={() => setModalRegistration(false)}>Submit</button>
+        <button type="button" id="twoR" className="modal-button" onClick={() => setModalRegistration(false)}>Close</button>
       </form>
     </Modal>
   );
 }
 
+Registration.defaultProps = {
+  isRegistration: false,
+  setModalRegistration: null,
+
+};
 Registration.propTypes = {
-  modalActiveReg: PropTypes.bool.isRequired,
-  setModalActiveReg: PropTypes.func.isRequired,
+  isRegistration: bool,
+  setModalRegistration: func,
 };
 
 export default memo(Registration);

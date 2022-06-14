@@ -2,20 +2,22 @@ import React, { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LogIn from '../LogIn/LogIn';
-import './index.css';
 import Registration from '../Registration/Registration';
 import { logOutUser } from '../../redux/actions/actionCreator';
 
+import './index.css';
+
 function Header() {
   const dispatch = useDispatch();
-  const [loginState, setLoginState] = useState(false);
-  const [regState, setRegState] = useState(false);
+  const [isLogIn, setModalLogIn] = useState(false);
+  const [isRegistration, setModalRegistration] = useState(false);
   const tokenReg = useSelector((state) => state.userReducer.isAccess);
 
   const logOut = () => {
     localStorage.clear();
     dispatch(logOutUser());
   };
+
   return (
     <header className="header">
       <div className="header__container">
@@ -34,13 +36,13 @@ function Header() {
           </nav>
         ) : (
           <nav className="header__menu">
-            <button id="sign-in" type="button" onClick={() => setLoginState(true)}>Sign in</button>
-            <button id="out" type="button" onClick={() => setRegState(true)}>Registration</button>
+            <button id="sign-in" type="button" onClick={() => setModalLogIn(true)}>Sign in</button>
+            <button id="out" type="button" onClick={() => setModalRegistration(true)}>Registration</button>
           </nav>
         )}
       </div>
-      <LogIn modalActiveIn={loginState} setModalActiveIn={setLoginState} />
-      <Registration modalActiveReg={regState} setModalActiveReg={setRegState} />
+      <LogIn isActive={isLogIn} setActive={setModalLogIn} />
+      <Registration isActive={isRegistration} setActive={setModalRegistration} />
     </header>
   );
 }

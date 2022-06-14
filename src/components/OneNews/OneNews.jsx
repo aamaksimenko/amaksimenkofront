@@ -5,7 +5,8 @@ import * as PropTypes from 'prop-types';
 import './index.css';
 
 function OneNews({
-  title, article, tag, author, CreatedAt,
+  title,
+  article, tag, author, CreatedAt,
 }) {
   return (
     <div className="news">

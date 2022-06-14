@@ -1,7 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
-import * as PropTypes from 'prop-types';
+import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -9,7 +8,7 @@ import { postLogIn } from '../../redux/actions/actionCreator';
 import Modal from '../Modal/Modal';
 import './login.css';
 
-function LogIn({ modalActiveIn, setModalActiveIn }) {
+function LogIn({ isLogIn, setModalLogIn }) {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -33,7 +32,7 @@ function LogIn({ modalActiveIn, setModalActiveIn }) {
     },
   });
   return (
-    <Modal active={modalActiveIn} setActive={setModalActiveIn}>
+    <Modal isActive={isLogIn} setActive={setModalLogIn}>
       <h2 className="modal-title">Sign in</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="form-div">
@@ -42,7 +41,6 @@ function LogIn({ modalActiveIn, setModalActiveIn }) {
           {formik.touched.email && formik.errors.email ? (
             <div>{formik.errors.email}</div>
           ) : null}
-
           <h3>Password</h3>
           <input className="form-input" id="password_log" type="password" {...formik.getFieldProps('password')} />
           {formik.touched.password && formik.errors.password ? (
@@ -50,16 +48,20 @@ function LogIn({ modalActiveIn, setModalActiveIn }) {
           ) : null}
           <br />
         </div>
-        <button type="submit" id="oneL" className="modal-button" onClick={() => setModalActiveIn(false)}>Submit</button>
-        <button type="button" id="twoL" className="modal-button" onClick={() => setModalActiveIn(false)}>Close</button>
+        <button type="submit" id="oneL" className="modal-button" onClick={() => setModalLogIn(false)}>Submit</button>
+        <button type="button" id="twoL" className="modal-button" onClick={() => setModalLogIn(false)}>Close</button>
       </form>
     </Modal>
   );
 }
+LogIn.defaultProps = {
+  isLogIn: false,
+  setModalLogIn: null,
 
+};
 LogIn.propTypes = {
-  modalActiveIn: PropTypes.bool.isRequired,
-  setModalActiveIn: PropTypes.func.isRequired,
+  isLogIn: bool,
+  setModalLogIn: func,
 };
 
 export default memo(LogIn);

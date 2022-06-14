@@ -5,19 +5,20 @@ import OneNews from '../components/OneNews/OneNews';
 // import InfoBlock from '../components/InfoBlock/InfoBlock';
 import { getNews } from '../redux/actions/actionCreator';
 import Loader from '../components/Loader/Loader';
+
 import './index.css';
 
 function MainPage() {
   const dispatch = useDispatch();
 
-  const { news } = useSelector((state) => state.newsReducer);
-  const loading = useSelector((state) => state.newsReducer.isLoading);
+  const news = useSelector((state) => state.newsReducer.news);
+  const isLoading = useSelector((state) => state.newsReducer.isLoading);
 
   useEffect(() => {
     dispatch(getNews());
   }, [dispatch]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <Loader />
     );

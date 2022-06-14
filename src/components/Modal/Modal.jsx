@@ -1,24 +1,30 @@
 import React, { memo } from 'react';
-import * as PropTypes from 'prop-types';
+import {
+  bool, func, instanceOf,
+} from 'prop-types';
+
 import './index.css';
 
-function Modal({ active, setActive, children }) {
+function Modal({ isActive, setActive, children }) {
   return (
 
-    <div className={active ? 'modal active' : 'modal'} onClick={() => setActive(false)} aria-hidden="true">
-      <div className="modal__content" onClick={(e) => e.stopPropagation()} aria-hidden="true">
-        {active}
-        {setActive}
+    <div className={isActive ? 'modal active' : 'modal'} onClick={() => setActive(true)} aria-hidden="true">
+      <div className="modal__content" onClick={(event) => event.stopPropagation()} aria-hidden="true">
         {children}
       </div>
     </div>
   );
 }
 
+Modal.defaultProps = {
+  isActive: false,
+  setActive: null,
+  children: null,
+};
 Modal.propTypes = {
-  active: PropTypes.bool.isRequired,
-  setActive: PropTypes.func.isRequired,
-  children: PropTypes.string.isRequired,
+  isActive: bool,
+  setActive: func,
+  children: instanceOf(Array),
 };
 
 export default memo(Modal);

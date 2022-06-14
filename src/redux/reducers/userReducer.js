@@ -40,9 +40,7 @@ function userReducer(state = initialUser, action = {}) {
     case LOGOUT_USER:
       return {
         ...state,
-        isLoading: false,
         isAccess: false,
-        error: action.payload,
       };
     default:
       return state;
