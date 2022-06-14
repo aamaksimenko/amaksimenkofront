@@ -1,7 +1,7 @@
 import {
   GET_NEWS, GET_NEWS_SUCCESS, GET_NEWS_FAILURE, POST_USER, POST_USER_SUCCESS,
   POST_USER_FAILURE, POST_LOGIN, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE,
-  LOGOUT_SUCCESS, LOGOUT_FAILURE,
+  LOGOUT_USER,
 } from '../constants';
 
 export const getNews = () => ({
@@ -48,12 +48,7 @@ export const postLogInFailure = (error) => ({
   error,
 });
 
-export const logOutSuccess = (error) => ({
-  type: LOGOUT_SUCCESS,
-  error,
-});
-
-export const logOutFailure = (error) => ({
-  type: LOGOUT_FAILURE,
+export const logOutUser = (error) => ({
+  type: LOGOUT_USER,
   error,
 });
