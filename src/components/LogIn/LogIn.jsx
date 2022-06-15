@@ -45,8 +45,8 @@ function LogIn({ isLogIn, setModalLogIn }) {
           ) : null}
           <br />
         </div>
-        <button type="submit" id="oneL" className="modal-button">Submit</button>
-        <button type="button" id="twoL" className="modal-button" onClick={() => setModalLogIn(false)}>Close</button>
+        <button type="submit" id="SubmitButton" className="modal-button">Submit</button>
+        <button type="button" id="CloseButton" className="modal-button" onClick={() => setModalLogIn(false)}>Close</button>
       </form>
 
       {statusLogIn.error

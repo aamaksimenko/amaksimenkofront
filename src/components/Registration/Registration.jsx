@@ -1,15 +1,17 @@
 import React, { memo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { postUser } from '../../redux/actions/actionCreator';
 import Modal from '../Modal/Modal';
+import InfoBlock from '../InfoBlock/InfoBlock';
 import './registration.css';
 
 function Registration({ isRegistration, setModalRegistration }) {
   const dispatch = useDispatch();
+  const statusRegistration = useSelector((state) => state.userReducer);
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -64,6 +66,13 @@ function Registration({ isRegistration, setModalRegistration }) {
         <button type="submit" id="oneR" className="modal-button">Submit</button>
         <button type="button" id="twoR" className="modal-button" onClick={() => setModalRegistration(false)}>Close</button>
       </form>
+      {statusRegistration.error
+        ? <InfoBlock severity="error" text="This email is already taken!" />
+        : null}
+
+      {statusRegistration.user?.message
+        ? <InfoBlock severity="success" text={statusRegistration.user.message} />
+        : null}
     </Modal>
   );
 }

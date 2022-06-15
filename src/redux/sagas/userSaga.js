@@ -10,6 +10,7 @@ function* registrationUser({ payload }) {
     yield put(postUserSuccess(data.data));
     localStorage.setItem('token', data.headers.authorization);
   } catch (error) {
+    console.log(error);
     yield put(postUserFailure(error.message));
   }
 }
