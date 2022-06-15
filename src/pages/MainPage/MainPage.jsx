@@ -1,10 +1,9 @@
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import OneNews from '../components/OneNews/OneNews';
-// import InfoBlock from '../components/InfoBlock/InfoBlock';
-import { getNews } from '../redux/actions/actionCreator';
-import Loader from '../components/Loader/Loader';
+import OneNews from '../../components/OneNews/OneNews';
+import Loader from '../../components/Loader/Loader';
+import { getNews } from '../../redux/actions/actionCreator';
 
 import './index.css';
 
@@ -23,10 +22,6 @@ function MainPage() {
       <Loader />
     );
   }
-
-  // if (!news.length) {
-  //   return <InfoBlock />;
-  // }
 
   return (
     <div className="main-page">

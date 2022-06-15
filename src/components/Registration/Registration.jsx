@@ -29,17 +29,7 @@ function Registration({ isRegistration, setModalRegistration }) {
         .required('Required')
         .oneOf([Yup.ref('password')], 'Passwords don\'t match'),
     }),
-    onSubmit: (values) => {
-      const post = {
-        user: {
-          name: values.name,
-          email: values.email,
-          password: values.password,
-          confirm_password: values.confirmPassword,
-        },
-      };
-      dispatch(postUser(post));
-    },
+    onSubmit: (values) => (dispatch(postUser(values))),
   });
   return (
     <Modal isActive={isRegistration} setActive={setModalRegistration}>

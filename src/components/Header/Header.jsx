@@ -9,9 +9,9 @@ import './index.css';
 
 function Header() {
   const dispatch = useDispatch();
-  const [isLogIn, setModalLogIn] = useState(false);
-  const [isRegistration, setModalRegistration] = useState(false);
-  const tokenReg = useSelector((state) => state.userReducer.isAccess);
+  const [isLogIn, setLogInWindow] = useState(false);
+  const [isRegistration, setRegistrationWindow] = useState(false);
+  const isAccess = useSelector((state) => state.userReducer.isAccess);
 
   const logOut = () => {
     localStorage.clear();
@@ -29,20 +29,20 @@ function Header() {
           <input type="search" className="header__input" />
         </div>
 
-        {(tokenReg) ? (
+        {(isAccess) ? (
           <nav className="header__menu">
             <button id="sign-out" type="button" onClick={logOut}>Log Out</button>
             <button id="page" type="button">Profile</button>
           </nav>
         ) : (
           <nav className="header__menu">
-            <button id="sign-in" type="button" onClick={() => setModalLogIn(true)}>Sign in</button>
-            <button id="out" type="button" onClick={() => setModalRegistration(true)}>Registration</button>
+            <button id="sign-in" type="button" onClick={() => setLogInWindow(true)}>Sign in</button>
+            <button id="out" type="button" onClick={() => setRegistrationWindow(true)}>Registration</button>
           </nav>
         )}
       </div>
-      <LogIn isActive={isLogIn} setActive={setModalLogIn} />
-      <Registration isActive={isRegistration} setActive={setModalRegistration} />
+      <LogIn isLogIn={isLogIn} setModalLogIn={setLogInWindow} />
+      <Registration isRegistration={isRegistration} setModalRegistration={setRegistrationWindow} />
     </header>
   );
 }

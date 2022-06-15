@@ -21,15 +21,7 @@ function LogIn({ isLogIn, setModalLogIn }) {
         .required('No password provided.')
         .min(6, 'Password is too short - should be 8 chars minimum.'),
     }),
-    onSubmit: (values) => {
-      const post = {
-        user: {
-          email: values.email,
-          password: values.password,
-        },
-      };
-      dispatch(postLogIn(post));
-    },
+    onSubmit: (values) => (dispatch(postLogIn(values))),
   });
   return (
     <Modal isActive={isLogIn} setActive={setModalLogIn}>

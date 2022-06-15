@@ -24,7 +24,7 @@ function userReducer(state = initialUser, action = {}) {
     case POST_USER_SUCCESS:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
         isLoading: false,
         isAccess: true,
         error: null,
