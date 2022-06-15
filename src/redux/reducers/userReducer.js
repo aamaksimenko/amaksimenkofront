@@ -6,7 +6,7 @@ import {
 export const initialUser = {
   user: null,
   isLoading: false,
-  isAccess: false,
+  isAccess: Boolean(localStorage.getItem('token')),
   error: null,
 };
 
@@ -24,7 +24,7 @@ function userReducer(state = initialUser, action = {}) {
     case POST_USER_SUCCESS:
       return {
         ...state,
-        user: action.payload.user,
+        user: action.payload,
         isLoading: false,
         isAccess: true,
         error: null,
@@ -35,7 +35,7 @@ function userReducer(state = initialUser, action = {}) {
         ...state,
         isLoading: false,
         isAccess: false,
-        error: action.payload,
+        error: action.error,
       };
     case LOGOUT_USER:
       return {

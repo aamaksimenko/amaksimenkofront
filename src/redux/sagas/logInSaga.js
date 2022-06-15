@@ -10,7 +10,7 @@ function* logInUser({ payload }) {
     yield put(postLogInSuccess(data.data));
     localStorage.setItem('token', data.headers.authorization);
   } catch (error) {
-    yield put(postLogInFailure());
+    yield put(postLogInFailure(error.response.data));
   }
 }
 function* listenerLogInUserSaga() {

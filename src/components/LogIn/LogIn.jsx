@@ -1,15 +1,17 @@
 import React, { memo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { postLogIn } from '../../redux/actions/actionCreator';
 import Modal from '../Modal/Modal';
+import InfoBlock from '../InfoBlock/InfoBlock';
 import './login.css';
 
 function LogIn({ isLogIn, setModalLogIn }) {
   const dispatch = useDispatch();
+  const statusLogIn = useSelector((state) => state.userReducer);
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -21,7 +23,10 @@ function LogIn({ isLogIn, setModalLogIn }) {
         .required('No password provided.')
         .min(6, 'Password is too short - should be 8 chars minimum.'),
     }),
-    onSubmit: (values) => (dispatch(postLogIn(values))),
+    onSubmit: (values) => {
+      dispatch(postLogIn(values));
+      formik.resetForm({ values: '' });
+    },
   });
   return (
     <Modal isActive={isLogIn} setActive={setModalLogIn}>
@@ -40,9 +45,17 @@ function LogIn({ isLogIn, setModalLogIn }) {
           ) : null}
           <br />
         </div>
-        <button type="submit" id="oneL" className="modal-button" onClick={() => setModalLogIn(false)}>Submit</button>
+        <button type="submit" id="oneL" className="modal-button">Submit</button>
         <button type="button" id="twoL" className="modal-button" onClick={() => setModalLogIn(false)}>Close</button>
       </form>
+
+      {statusLogIn.error
+        ? <InfoBlock severity="error" text={statusLogIn.error} />
+        : null}
+
+      {statusLogIn.user?.message
+        ? <InfoBlock severity="success" text={statusLogIn.user.message} />
+        : null}
     </Modal>
   );
 }

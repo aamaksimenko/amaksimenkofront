@@ -61,7 +61,7 @@ function Registration({ isRegistration, setModalRegistration }) {
           ) : null}
           <br />
         </div>
-        <button type="submit" id="oneR" className="modal-button" onClick={() => setModalRegistration(false)}>Submit</button>
+        <button type="submit" id="oneR" className="modal-button">Submit</button>
         <button type="button" id="twoR" className="modal-button" onClick={() => setModalRegistration(false)}>Close</button>
       </form>
     </Modal>
