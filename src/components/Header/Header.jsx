@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LogIn from '../LogIn/LogIn';
@@ -13,10 +13,10 @@ function Header() {
   const [isRegistration, setRegistrationWindow] = useState(false);
   const isAccess = useSelector((state) => state.userReducer.isAccess);
 
-  const logOut = () => {
+  const logOut = useCallback(() => {
     localStorage.clear();
     dispatch(logOutUser());
-  };
+  }, [dispatch]);
 
   return (
     <header className="header">

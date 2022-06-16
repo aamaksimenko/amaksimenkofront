@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
+import { string } from 'prop-types';
 import { Alert } from '@mui/material';
-import * as PropTypes from 'prop-types';
 
 function InfoBlock({ severity, text }) {
   return (
@@ -11,8 +11,8 @@ function InfoBlock({ severity, text }) {
 }
 
 InfoBlock.propTypes = {
-  severity: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  severity: string.isRequired,
+  text: string.isRequired,
 };
 
 export default memo(InfoBlock);

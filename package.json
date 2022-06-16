@@ -10,6 +10,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "classnames": "^2.3.1",
     "dotenv": "^16.0.1",
     "formik": "^2.2.9",
     "fs": "0.0.1-security",
@@ -44,16 +45,28 @@
           ]
         }
       ],
-      "jsx-a11y/label-has-associated-control": ["error", {
-        "required": {
-          "some": ["nesting", "id"]
+      "jsx-a11y/label-has-associated-control": [
+        "error",
+        {
+          "required": {
+            "some": [
+              "nesting",
+              "id"
+            ]
+          }
         }
-      }],
-      "jsx-a11y/label-has-for": ["error", {
-        "required": {
-          "some": ["nesting", "id"]
+      ],
+      "jsx-a11y/label-has-for": [
+        "error",
+        {
+          "required": {
+            "some": [
+              "nesting",
+              "id"
+            ]
+          }
         }
-      }]
+      ]
     },
     "extends": [
       "react-app",

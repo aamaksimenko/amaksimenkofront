@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
+
 import './index.css';
 
+// Bootstrap classNames
 function Loader() {
   return (
     <div className="upper-spinner">
