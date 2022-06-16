@@ -41,10 +41,15 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .header__menu button{
   background-color: #20b2aa;
-  margin: 0 0 0 10px;  
+  margin: 0 0 0 10px;
 }
 
-.header__menu button:hover{
+.header__menu button a{
+  color: black;
+}
+
+.header__menu button:hover,
+.header__menu button a:hover{
   color: #7FFFD4;
 }
 
