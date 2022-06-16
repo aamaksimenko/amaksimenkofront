@@ -1,11 +1,14 @@
 import React, { memo } from 'react';
-import * as PropTypes from 'prop-types';
-// import { Grid } from '@mui/material';
+import { string } from 'prop-types';
 
 import './index.css';
 
 function OneNews({
-  title, article, tag, author, CreatedAt,
+  title,
+  article,
+  tag,
+  author,
+  CreatedAt,
 }) {
   return (
     <div className="news">
@@ -30,11 +33,11 @@ function OneNews({
 }
 
 OneNews.propTypes = {
-  title: PropTypes.string.isRequired,
-  article: PropTypes.string.isRequired,
-  tag: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  CreatedAt: PropTypes.string.isRequired,
+  title: string.isRequired,
+  article: string.isRequired,
+  tag: string.isRequired,
+  author: string.isRequired,
+  CreatedAt: string.isRequired,
 };
 
 export default memo(OneNews);

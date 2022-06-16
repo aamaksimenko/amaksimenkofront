@@ -1,21 +1,21 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+
 import { Container } from '@mui/material';
 
-import MainPage from './pages/MainPage';
+import MainPage from './pages/MainPage/MainPage';
 import Header from './components/Header/Header';
 
 function App() {
   return (
-    <div>
+    <BrowserRouter>
       <Header />
       <Container>
         <Routes>
           <Route path="/" element={<MainPage />} />
         </Routes>
       </Container>
-
-    </div>
+    </BrowserRouter>
   );
 }
 

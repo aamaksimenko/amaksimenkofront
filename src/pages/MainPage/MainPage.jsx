@@ -1,24 +1,27 @@
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Grid } from '@mui/material';
 
-import OneNews from '../components/OneNews/OneNews';
-// import InfoBlock from '../components/InfoBlock/InfoBlock';
-import { getNews } from '../redux/actions/newsActions';
+import OneNews from '../../components/OneNews/OneNews';
+import Loader from '../../components/Loader/Loader';
+import { getNews } from '../../redux/actions/actionCreator';
+
 import './index.css';
 
 function MainPage() {
   const dispatch = useDispatch();
 
-  const { news } = useSelector((state) => state.newsReducer);
+  const news = useSelector((state) => state.newsReducer.news);
+  const isLoading = useSelector((state) => state.newsReducer.isLoading);
 
   useEffect(() => {
     dispatch(getNews());
   }, [dispatch]);
 
-  // if (!news.length) {
-  //   return <InfoBlock />;
-  // }
+  if (isLoading) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <div className="main-page">
