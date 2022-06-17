@@ -4,7 +4,7 @@ import React, {
   useCallback,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import LogIn from '../LogIn/LogIn';
 import Registration from '../Registration/Registration';
@@ -14,6 +14,7 @@ import './index.css';
 
 function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isLogIn, setLogInWindow] = useState(false);
   const [isRegistration, setRegistrationWindow] = useState(false);
   const isAccess = useSelector((state) => state.userReducer.isAccess);
@@ -21,6 +22,7 @@ function Header() {
   const logOut = useCallback(() => {
     localStorage.clear();
     dispatch(logOutUser());
+    navigate('/');
   }, [dispatch]);
 
   return (
