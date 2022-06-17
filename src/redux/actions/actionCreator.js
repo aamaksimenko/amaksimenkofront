@@ -12,9 +12,6 @@ import {
   USER_DATA,
   USER_DATA_SUCCESS,
   USER_DATA_FAILURE,
-  USER_NEWS,
-  USER_NEWS_SUCCESS,
-  USER_NEWS_FAILURE,
 } from '../constants';
 
 export const getNews = () => ({
@@ -77,19 +74,5 @@ export const userDataSuccess = (payload) => ({
 
 export const userDataFailure = (error) => ({
   type: USER_DATA_FAILURE,
-  error,
-});
-
-export const userNews = () => ({
-  type: USER_NEWS,
-});
-
-export const userNewsSuccess = (payload) => ({
-  type: USER_NEWS_SUCCESS,
-  payload,
-});
-
-export const userNewsFailure = (error) => ({
-  type: USER_NEWS_FAILURE,
   error,
 });

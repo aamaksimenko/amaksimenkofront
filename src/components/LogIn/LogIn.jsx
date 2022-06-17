@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 
@@ -12,20 +13,20 @@ import './login.css';
 
 function LogIn({ isLogIn, setModalLogIn }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const statusLogIn = useSelector((state) => state.userReducer);
 
-  const submitLogIn = useCallback((values) => dispatch(postLogIn(values), [dispatch]));
+  const submitLogIn = useCallback((values) => {
+    navigate('/user_page');
+    dispatch(postLogIn(values));
+    setModalLogIn(false);
+  }, [dispatch]);
 
   const formik = useFormik({
     initialValues: initialValuesLogIn,
     validationSchema: validationSchemaLogIn,
     onSubmit: submitLogIn,
   });
-
-  // const handleClear = (event) => {
-  //   event.preventDefault();
-  //   initialValues = initialValuesLogIn;
-  // };
 
   return (
     <Modal isActive={isLogIn} setActive={setModalLogIn}>
@@ -70,9 +71,9 @@ function LogIn({ isLogIn, setModalLogIn }) {
         ? <InfoBlock severity="error" text={statusLogIn.error} />
         : null}
 
-      {statusLogIn.user?.message
+      {/* {statusLogIn.user?.message
         ? <InfoBlock severity="success" text={statusLogIn.user.message} />
-        : null}
+        : null} */}
     </Modal>
   );
 }

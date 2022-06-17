@@ -11,8 +11,8 @@ function* getUserData() {
         Authorization: localStorage.getItem('token'),
       },
     };
-    const data = yield call(api.get, '/profile', config);
-    yield put(userDataSuccess(data.data));
+    const { data } = yield call(api.get, '/profile', config);
+    yield put(userDataSuccess(data));
   } catch (error) {
     yield put(userDataFailure(error));
   }
