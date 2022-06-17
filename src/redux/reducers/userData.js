@@ -1,7 +1,7 @@
 import { USER_DATA, USER_DATA_SUCCESS, USER_DATA_FAILURE } from '../constants';
 
 export const initialUserDataState = {
-  user: [],
+  data: [],
   isLoading: false,
   error: null,
 };
@@ -16,7 +16,7 @@ function userData(state = initialUserDataState, action = {}) {
     case USER_DATA_SUCCESS:
       return {
         ...state,
-        user: action.payload,
+        data: action.payload,
         isLoading: false,
         error: null,
       };

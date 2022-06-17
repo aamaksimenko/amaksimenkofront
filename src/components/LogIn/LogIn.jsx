@@ -22,6 +22,11 @@ function LogIn({ isLogIn, setModalLogIn }) {
     onSubmit: submitLogIn,
   });
 
+  // const handleClear = (event) => {
+  //   event.preventDefault();
+  //   initialValues = initialValuesLogIn;
+  // };
+
   return (
     <Modal isActive={isLogIn} setActive={setModalLogIn}>
       <h2 className="modal-title">Sign in</h2>
@@ -58,7 +63,6 @@ function LogIn({ isLogIn, setModalLogIn }) {
           onClick={() => setModalLogIn(false)}
         >
           Close
-
         </button>
       </form>
 
