@@ -15,3 +15,7 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const USER_DATA = 'USER_DATA';
 export const USER_DATA_SUCCESS = 'USER_DATA_SUCCESS';
 export const USER_DATA_FAILURE = 'USER_DATA_FAILURE';
+
+export const ADD_NEWS = 'ADD_NEWS';
+export const ADD_NEWS_SUCCESS = 'ADD_NEWS_SUCCESS';
+export const ADD_NEWS_FAILURE = 'ADD_NEWS_FAILURE';

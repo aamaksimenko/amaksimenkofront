@@ -1,24 +1,36 @@
 import React, { memo, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 
-import { postUser } from '../../redux/actions/actionCreator';
+import { addNews, userData } from '../../redux/actions/actionCreator';
 import Modal from '../Modal/Modal';
-import { initialValuesRegistration, validationSchemaRegistration } from '../constants';
+import { initialValuesAddNews, validationSchemaAddNews } from '../constants';
 
 function AddNews({ isAddNews, setAddNews }) {
   const dispatch = useDispatch();
 
-  const submitRegistration = useCallback((values) => {
-    dispatch(postUser(values));
-    setAddNews(false);
-  }, [dispatch]);
+  const isAccess = useSelector((state) => state.userReducer.isAccess);
+
+  const submitAddNews = useCallback((values) => {
+    if (isAccess) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const addingNews = {
+        ...values,
+        image: false,
+        author: user[0].name,
+        user_id: user[0].id,
+      };
+      dispatch(addNews(addingNews));
+      dispatch(userData());
+      setAddNews(false);
+    }
+  }, [dispatch, isAccess]);
 
   const formik = useFormik({
-    initialValues: initialValuesRegistration,
-    validationSchema: validationSchemaRegistration,
-    onSubmit: submitRegistration,
+    initialValues: initialValuesAddNews,
+    validationSchema: validationSchemaAddNews,
+    onSubmit: submitAddNews,
   });
   return (
     <Modal isActive={isAddNews} setActive={setAddNews}>
@@ -53,12 +65,12 @@ function AddNews({ isAddNews, setAddNews }) {
           <input
             className="form-input"
             value=""
-            id="tags"
+            id="tag"
             type="text"
-            {...formik.getFieldProps('tags')}
+            {...formik.getFieldProps('tag')}
           />
-          {formik.touched.tags && formik.errors.tags ? (
-            <div>{formik.errors.tags}</div>
+          {formik.touched.tag && formik.errors.tag ? (
+            <div>{formik.errors.tag}</div>
           ) : null}
           <br />
         </div>
