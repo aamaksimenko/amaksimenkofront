@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 
@@ -9,23 +10,34 @@ import { initialValuesAddNews, validationSchemaAddNews } from '../constants';
 
 function AddNews({ isAddNews, setAddNews }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const isAccess = useSelector((state) => state.userReducer.isAccess);
   const user = JSON.parse(localStorage.getItem('user'));
 
-  const submitAddNews = useCallback((values) => {
-    if (isAccess) {
-      const addingNews = {
-        ...values,
-        image: false,
-        author: user.name,
-        user_id: user.id,
-      };
-      dispatch(addNews(addingNews));
-      dispatch(userData());
-      setAddNews(false);
-    }
-  }, [dispatch, isAccess]);
+  const submitAddNews = useCallback(
+    (values) => {
+      if (isAccess) {
+        if (!user.name || !user.id) {
+          alert(
+            'Authorization error! Please, repeat the authorization procedure',
+          );
+          localStorage.clear();
+          navigate('/');
+        }
+        const addingNews = {
+          ...values,
+          image: false,
+          author: user.name,
+          user_id: user.id,
+        };
+        dispatch(addNews(addingNews));
+        dispatch(userData());
+        setAddNews(false);
+      }
+    },
+    [dispatch, isAccess],
+  );
 
   const formik = useFormik({
     initialValues: initialValuesAddNews,
@@ -74,10 +86,18 @@ function AddNews({ isAddNews, setAddNews }) {
           ) : null}
           <br />
         </div>
-        <button type="submit" id="addNews" className="modal-button">Add news</button>
-        <button type="button" id="closeAddNews" className="modal-button" onClick={() => setAddNews(false)}>Close</button>
+        <button type="submit" id="addNews" className="modal-button">
+          Add news
+        </button>
+        <button
+          type="button"
+          id="closeAddNews"
+          className="modal-button"
+          onClick={() => setAddNews(false)}
+        >
+          Close
+        </button>
       </form>
-
     </Modal>
   );
 }
@@ -85,7 +105,6 @@ function AddNews({ isAddNews, setAddNews }) {
 AddNews.defaultProps = {
   isAddNews: false,
   setAddNews: null,
-
 };
 AddNews.propTypes = {
   isAddNews: bool,
