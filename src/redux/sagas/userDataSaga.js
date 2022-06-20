@@ -6,14 +6,8 @@ import { userDataSuccess, userDataFailure } from '../actions/actionCreator';
 
 function* getUserData() {
   try {
-    // const config = {
-    //   headers: {
-    //     Authorization: localStorage.getItem('token'),
-    //   },
-    // };
     const { data } = yield call(api.get, '/profile');
     yield put(userDataSuccess(data));
-    console.log(data);
   } catch (error) {
     yield put(userDataFailure(error));
   }
