@@ -17,9 +17,9 @@ function LogIn({ isLogIn, setModalLogIn }) {
   const statusLogIn = useSelector((state) => state.userReducer);
 
   const submitLogIn = useCallback((values) => {
-    navigate('/user_page');
     dispatch(postLogIn(values));
     setModalLogIn(false);
+    navigate('/user_page');
   }, [dispatch]);
 
   const formik = useFormik({
@@ -70,10 +70,6 @@ function LogIn({ isLogIn, setModalLogIn }) {
       {statusLogIn.error
         ? <InfoBlock severity="error" text={statusLogIn.error} />
         : null}
-
-      {/* {statusLogIn.user?.message
-        ? <InfoBlock severity="success" text={statusLogIn.user.message} />
-        : null} */}
     </Modal>
   );
 }

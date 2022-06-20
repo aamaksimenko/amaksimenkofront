@@ -18,14 +18,15 @@ function UserPage() {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.userData.data);
-
-  const isLoading = useSelector((state) => state.userData.isLoading);
+  const isAccess = useSelector((state) => state.userReducer.isAccess);
 
   useEffect(() => {
-    dispatch(userData());
-  }, [dispatch]);
+    if (isAccess) {
+      dispatch(userData());
+    }
+  }, [dispatch, isAccess]);
 
-  if (isLoading) {
+  if (!isAccess) {
     return (
       <Loader />
     );
@@ -59,7 +60,7 @@ function UserPage() {
       <div className="userNews">
         <h2>User News</h2>
         <div className="userNews__content">
-          {data.news?.map((post) => (
+          {data.news?.length ? data.news?.map((post) => (
             <OneNews
               key={post.id}
               title={post.title}
@@ -68,7 +69,7 @@ function UserPage() {
               author={post.author}
               CreatedAt={post.created_at}
             />
-          ))}
+          )) : <p>No news</p>}
         </div>
       </div>
     </div>

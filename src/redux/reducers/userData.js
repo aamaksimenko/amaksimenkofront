@@ -1,4 +1,9 @@
-import { USER_DATA, USER_DATA_SUCCESS, USER_DATA_FAILURE } from '../constants';
+import {
+  USER_DATA,
+  USER_DATA_SUCCESS,
+  USER_DATA_FAILURE,
+  LOGOUT_USER,
+} from '../constants';
 
 export const initialUserDataState = {
   data: [],
@@ -25,6 +30,12 @@ function userData(state = initialUserDataState, action = {}) {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        data: [],
+        isAccess: false,
       };
     default:
       return state;

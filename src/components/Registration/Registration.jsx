@@ -18,9 +18,9 @@ function Registration({ isRegistration, setModalRegistration }) {
   const statusRegistration = useSelector((state) => state.userReducer);
 
   const submitRegistration = useCallback((values) => {
-    navigate('/user_page');
     dispatch(postUser(values));
     setModalRegistration(false);
+    navigate('/user_page');
   }, [dispatch]);
 
   const formik = useFormik({
@@ -88,10 +88,6 @@ function Registration({ isRegistration, setModalRegistration }) {
       </form>
       {statusRegistration.error
         ? <InfoBlock severity="error" text="This email is already taken!" />
-        : null}
-
-      {statusRegistration.user?.message
-        ? <InfoBlock severity="success" text={statusRegistration.user.message} />
         : null}
     </Modal>
   );
