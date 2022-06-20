@@ -1,5 +1,10 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, {
+  memo,
+  useState,
+  useCallback,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
 
 import LogIn from '../LogIn/LogIn';
 import Registration from '../Registration/Registration';
@@ -9,6 +14,7 @@ import './index.css';
 
 function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isLogIn, setLogInWindow] = useState(false);
   const [isRegistration, setRegistrationWindow] = useState(false);
   const isAccess = useSelector((state) => state.userReducer.isAccess);
@@ -16,13 +22,14 @@ function Header() {
   const logOut = useCallback(() => {
     localStorage.clear();
     dispatch(logOutUser());
+    navigate('/');
   }, [dispatch]);
 
   return (
     <header className="header">
       <div className="header__container">
         <div className="header__home">
-          <a href="/">NEWS</a>
+          <Link to="/">NEWS</Link>
         </div>
         <div className="header__search">
           <button type="submit" className="header__button">Search</button>
@@ -32,7 +39,9 @@ function Header() {
         {(isAccess) ? (
           <nav className="header__menu">
             <button id="sign-out" type="button" onClick={logOut}>Log Out</button>
-            <button id="page" type="button">Profile</button>
+            <button id="page" type="button">
+              <Link to="/user_page">Profile</Link>
+            </button>
           </nav>
         ) : (
           <nav className="header__menu">

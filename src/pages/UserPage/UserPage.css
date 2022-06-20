@@ -1,0 +1,10 @@
+.css-bhp9pd-MuiPaper-root-MuiCard-root{
+    box-shadow: none !important;
+}
+
+.userNews__content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+

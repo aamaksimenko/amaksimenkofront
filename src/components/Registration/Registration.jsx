@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 
@@ -12,9 +13,15 @@ import './registration.css';
 
 function Registration({ isRegistration, setModalRegistration }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const statusRegistration = useSelector((state) => state.userReducer);
 
-  const submitRegistration = useCallback((values) => dispatch(postUser(values)), [dispatch]);
+  const submitRegistration = useCallback((values) => {
+    dispatch(postUser(values));
+    setModalRegistration(false);
+    navigate('/user_page');
+  }, [dispatch]);
 
   const formik = useFormik({
     initialValues: initialValuesRegistration,
@@ -81,10 +88,6 @@ function Registration({ isRegistration, setModalRegistration }) {
       </form>
       {statusRegistration.error
         ? <InfoBlock severity="error" text="This email is already taken!" />
-        : null}
-
-      {statusRegistration.user?.message
-        ? <InfoBlock severity="success" text={statusRegistration.user.message} />
         : null}
     </Modal>
   );
