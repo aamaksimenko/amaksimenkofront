@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '@mui/material/Card';
@@ -10,12 +10,14 @@ import Typography from '@mui/material/Typography';
 
 import Loader from '../../components/Loader/Loader';
 import OneNews from '../../components/OneNews/OneNews';
+import AddNews from '../../components/AddNews/AddNews';
 import { userData } from '../../redux/actions/actionCreator';
 
 import './UserPage.css';
 
 function UserPage() {
   const dispatch = useDispatch();
+  const [isAddNews, setModalAddNews] = useState(false);
 
   const data = useSelector((state) => state.userData.data);
   const isAccess = useSelector((state) => state.userReducer.isAccess);
@@ -53,8 +55,9 @@ function UserPage() {
           </CardContent>
           <CardActions>
             <Button size="small">Edit profile</Button>
-            <Button size="small">Add news</Button>
+            <Button size="small" onClick={() => setModalAddNews(true)}>Add news</Button>
           </CardActions>
+          <AddNews isAddNews={isAddNews} setAddNews={setModalAddNews} />
         </Card>
       </div>
       <div className="userNews">
