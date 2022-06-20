@@ -8,7 +8,7 @@ function* registrationUser({ payload }) {
   try {
     const data = yield call(api.post, '/users', { user: payload });
     yield put(postUserSuccess(data.data));
-    localStorage.setItem('user', JSON.stringify([data.data.user]));
+    localStorage.setItem('user', JSON.stringify(data.data.user));
     localStorage.setItem('token', data.headers.authorization);
   } catch (error) {
     yield put(postUserFailure(error.message));

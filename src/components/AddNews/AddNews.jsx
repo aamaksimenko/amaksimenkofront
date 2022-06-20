@@ -11,15 +11,15 @@ function AddNews({ isAddNews, setAddNews }) {
   const dispatch = useDispatch();
 
   const isAccess = useSelector((state) => state.userReducer.isAccess);
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const submitAddNews = useCallback((values) => {
     if (isAccess) {
-      const user = JSON.parse(localStorage.getItem('user'));
       const addingNews = {
         ...values,
         image: false,
-        author: user[0].name,
-        user_id: user[0].id,
+        author: user.name,
+        user_id: user.id,
       };
       dispatch(addNews(addingNews));
       dispatch(userData());
