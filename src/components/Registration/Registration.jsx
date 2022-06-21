@@ -17,8 +17,9 @@ function Registration({ isRegistration, setModalRegistration }) {
 
   const statusRegistration = useSelector((state) => state.userReducer);
 
-  const submitRegistration = useCallback((values) => {
+  const submitRegistration = useCallback((values, { resetForm }) => {
     dispatch(postUser(values));
+    resetForm(initialValuesRegistration);
     setModalRegistration(false);
     navigate('/user_page');
   }, [dispatch]);
@@ -84,7 +85,7 @@ function Registration({ isRegistration, setModalRegistration }) {
           <br />
         </div>
         <button type="submit" id="oneR" className="modal-button">Submit</button>
-        <button type="button" id="twoR" className="modal-button" onClick={() => setModalRegistration(false)}>Close</button>
+        <button type="button" id="twoR" className="modal-button" onClick={() => { setModalRegistration(false); formik.resetForm(); }}>Close</button>
       </form>
       {statusRegistration.error
         ? <InfoBlock severity="error" text="This email is already taken!" />

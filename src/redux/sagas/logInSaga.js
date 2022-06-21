@@ -8,6 +8,7 @@ function* logInUser({ payload }) {
   try {
     const data = yield call(api.post, '/users/sign_in', { user: payload });
     yield put(postLogInSuccess(data.data));
+    localStorage.setItem('user', JSON.stringify(data.data.user));
     localStorage.setItem('token', data.headers.authorization);
   } catch (error) {
     yield put(postLogInFailure(error.response.data));
