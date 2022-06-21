@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 
-import { addNews, userData } from '../../redux/actions/actionCreator';
+import { addNews, userData, logOutUser } from '../../redux/actions/actionCreator';
 import Modal from '../Modal/Modal';
 import { initialValuesAddNews, validationSchemaAddNews } from '../constants';
 
@@ -13,18 +13,22 @@ function AddNews({ isAddNews, setAddNews }) {
   const navigate = useNavigate();
 
   const isAccess = useSelector((state) => state.userReducer.isAccess);
-  const user = JSON.parse(localStorage.getItem('user') ?? 'error');
 
   const submitAddNews = useCallback(
     (values) => {
-      if (isAccess) {
-        if (user === 'error') {
-          alert(
-            'Authorization error! Please, repeat the authorization procedure',
-          );
-          localStorage.clear();
-          navigate('/');
+      let user;
+      try {
+        user = JSON.parse(localStorage.getItem('user'));
+        if (!user.name || !user.id) {
+          throw new SyntaxError('Authorization error! Please, repeat the authorization procedure');
         }
+      } catch (error) {
+        alert(error.message);
+        localStorage.clear();
+        dispatch(logOutUser());
+        navigate('/');
+      }
+      if (isAccess) {
         const addingNews = {
           ...values,
           image: false,
