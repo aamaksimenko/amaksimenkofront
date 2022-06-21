@@ -13,12 +13,12 @@ function AddNews({ isAddNews, setAddNews }) {
   const navigate = useNavigate();
 
   const isAccess = useSelector((state) => state.userReducer.isAccess);
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user') ?? 'error');
 
   const submitAddNews = useCallback(
     (values) => {
       if (isAccess) {
-        if (!user.name || !user.id) {
+        if (user === 'error') {
           alert(
             'Authorization error! Please, repeat the authorization procedure',
           );

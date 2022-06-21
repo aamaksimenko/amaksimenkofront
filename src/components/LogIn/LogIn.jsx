@@ -14,10 +14,12 @@ import './login.css';
 function LogIn({ isLogIn, setModalLogIn }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const statusLogIn = useSelector((state) => state.userReducer);
 
-  const submitLogIn = useCallback((values) => {
+  const submitLogIn = useCallback((values, { resetForm }) => {
     dispatch(postLogIn(values));
+    resetForm(initialValuesLogIn);
     setModalLogIn(false);
     navigate('/user_page');
   }, [dispatch]);
@@ -39,6 +41,7 @@ function LogIn({ isLogIn, setModalLogIn }) {
             className="form-input"
             id="email_log"
             type="email"
+            onBlur={formik.handleBlur}
             {...formik.getFieldProps('email')}
           />
           {formik.touched.email && formik.errors.email ? (
@@ -61,7 +64,7 @@ function LogIn({ isLogIn, setModalLogIn }) {
           type="button"
           id="CloseButton"
           className="modal-button"
-          onClick={() => setModalLogIn(false)}
+          onClick={() => { setModalLogIn(false); formik.resetForm(); }}
         >
           Close
         </button>
