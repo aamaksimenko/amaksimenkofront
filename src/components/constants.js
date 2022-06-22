@@ -22,6 +22,8 @@ export const yupVariable = {
   nameNumberMax: 15,
   nameString: 'Must be 15 characters or less',
   emailString: 'Invalid email address',
+  emailMaxNumber: 30,
+  emailMaxNumberString: 'Must be 20 characters or less',
   passwordRequired: 'No password provided.',
   passwordNumberMin: 6,
   passwordString: 'Password is too short - should be 6 chars minimum.',
@@ -41,10 +43,12 @@ export const validationSchemaRegistration = Yup.object({
     .required(yupVariable.required),
   email: Yup.string()
     .email(yupVariable.emailString)
+    .max(yupVariable.emailMaxNumber, yupVariable.emailMaxNumberString)
     .required(yupVariable.required),
   password: Yup.string()
     .required(yupVariable.passwordRequired)
-    .min(yupVariable.passwordNumberMin, yupVariable.passwordString),
+    .min(yupVariable.passwordNumberMin, yupVariable.passwordString)
+    .matches(/[a-zA-Z0-9_]/, 'Password can only contain Latin letters, numbers and underscore.'),
   confirmPassword: Yup.string()
     .required(yupVariable.required)
     .oneOf([Yup.ref('password')], yupVariable.confirmPasswordMatch),
@@ -53,10 +57,12 @@ export const validationSchemaRegistration = Yup.object({
 export const validationSchemaLogIn = Yup.object({
   email: Yup.string()
     .email(yupVariable.emailString)
+    .max(yupVariable.emailMaxNumber, yupVariable.emailMaxNumberString)
     .required(yupVariable.required),
   password: Yup.string()
     .required(yupVariable.passwordRequired)
-    .min(yupVariable.passwordNumberMin, yupVariable.passwordString),
+    .min(yupVariable.passwordNumberMin, yupVariable.passwordString)
+    .matches(/[a-zA-Z0-9_]/, 'Password can only contain Latin letters, numbers and underscore.'),
 });
 
 export const validationSchemaAddNews = Yup.object({

@@ -15,7 +15,7 @@ function AddNews({ isAddNews, setAddNews }) {
   const isAccess = useSelector((state) => state.userReducer.isAccess);
 
   const submitAddNews = useCallback(
-    (values) => {
+    (values, { resetForm }) => {
       let user;
       try {
         user = JSON.parse(localStorage.getItem('user'));
@@ -36,6 +36,7 @@ function AddNews({ isAddNews, setAddNews }) {
           user_id: user.id,
         };
         dispatch(addNews(addingNews));
+        resetForm(initialValuesAddNews);
         dispatch(userData());
         setAddNews(false);
       }
