@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -29,9 +30,7 @@ function UserPage() {
   }, [dispatch, isAccess]);
 
   if (!isAccess) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
 
   return (
@@ -54,8 +53,12 @@ function UserPage() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Edit profile</Button>
-            <Button size="small" onClick={() => setModalAddNews(true)}>Add news</Button>
+            <Button size="small">
+              <Link to="/edit_profile">Edit Profile</Link>
+            </Button>
+            <Button size="small" onClick={() => setModalAddNews(true)}>
+              Add news
+            </Button>
           </CardActions>
           <AddNews isAddNews={isAddNews} setAddNews={setModalAddNews} />
         </Card>
@@ -63,16 +66,20 @@ function UserPage() {
       <div className="userNews">
         <h2>User News</h2>
         <div className="userNews__content">
-          {data.news?.length ? data.news?.map((post) => (
-            <OneNews
-              key={post.id}
-              title={post.title}
-              article={post.article}
-              tag={post.tag}
-              author={post.author}
-              CreatedAt={post.created_at}
-            />
-          )) : <p>No news</p>}
+          {data.news?.length ? (
+            data.news?.map((post) => (
+              <OneNews
+                key={post.id}
+                title={post.title}
+                article={post.article}
+                tag={post.tag}
+                author={post.author}
+                CreatedAt={post.created_at}
+              />
+            ))
+          ) : (
+            <p>No news</p>
+          )}
         </div>
       </div>
     </div>
