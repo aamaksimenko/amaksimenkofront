@@ -15,6 +15,9 @@ import {
   ADD_NEWS,
   ADD_NEWS_SUCCESS,
   ADD_NEWS_FAILURE,
+  EDIT_PROFILE,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_FAILURE,
 } from '../constants';
 
 export const getNews = () => ({
@@ -92,5 +95,20 @@ export const addNewsSuccess = (payload) => ({
 
 export const addNewsFailure = (error) => ({
   type: ADD_NEWS_FAILURE,
+  error,
+});
+
+export const editProfile = (payload) => ({
+  type: EDIT_PROFILE,
+  payload,
+});
+
+export const editProfileSuccess = (payload) => ({
+  type: EDIT_PROFILE_SUCCESS,
+  payload,
+});
+
+export const editProfileFailure = (error) => ({
+  type: EDIT_PROFILE_FAILURE,
   error,
 });

@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
 
+const user = JSON.parse(localStorage.getItem('user'));
+
 export const initialValuesRegistration = {
   name: '',
   email: '',
@@ -16,6 +18,11 @@ export const initialValuesAddNews = {
   title: '',
   article: '',
   tag: '',
+};
+
+export const initialValuesEdit = {
+  name: user.name,
+  email: user.email,
 };
 
 export const yupVariable = {
@@ -74,5 +81,15 @@ export const validationSchemaAddNews = Yup.object({
     .required(yupVariable.required),
   tag: Yup.string()
     .max(yupVariable.tagAddMax, yupVariable.tagString)
+    .required(yupVariable.required),
+});
+
+export const validationSchemaEdit = Yup.object({
+  name: Yup.string()
+    .max(yupVariable.nameNumberMax, yupVariable.nameString)
+    .required(yupVariable.required),
+  email: Yup.string()
+    .email(yupVariable.emailString)
+    .max(yupVariable.emailMaxNumber, yupVariable.emailMaxNumberString)
     .required(yupVariable.required),
 });

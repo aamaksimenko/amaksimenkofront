@@ -1,33 +1,53 @@
 import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 
+import { editProfile } from '../../redux/actions/actionCreator';
+
 import {
-  initialValuesRegistration,
-  validationSchemaRegistration,
+  initialValuesEdit,
+  validationSchemaEdit,
 } from '../constants';
 
 function EditProfile() {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const statusRegistration = useSelector((state) => state.userReducer);
-  console.log(statusRegistration);
+  const isAccess = useSelector((state) => state.editProfileReducer.isAccess);
+  console.log(isAccess);
 
-  const submitRegistration = useCallback(
-    (values, { resetForm }) => {
-      dispatch(values);
-      resetForm(initialValuesRegistration);
-      // navigate('/user_page');
+  const submitEdit = useCallback(
+
+    (values) => {
+      let editUser;
+      try {
+        editUser = JSON.parse(localStorage.getItem('user'));
+        if (!editUser.name || !editUser.id) {
+          throw new SyntaxError('User data change error. Try again later');
+        }
+      } catch (error) {
+        alert(error.message);
+        localStorage.clear();
+        navigate('/user_page');
+      }
+      if (isAccess) {
+        const edit = {
+          ...values,
+          image: false,
+          user_id: editUser.id,
+        };
+        dispatch(editProfile(edit));
+        navigate('/user_page');
+      }
     },
-    [dispatch]
+    [dispatch],
   );
   const formik = useFormik({
-    initialValues: initialValuesRegistration,
-    validationSchema: validationSchemaRegistration,
-    onSubmit: submitRegistration,
+    initialValues: initialValuesEdit,
+    validationSchema: validationSchemaEdit,
+    onSubmit: submitEdit,
   });
   return (
     <div>
@@ -37,7 +57,7 @@ function EditProfile() {
           <input
             className="form-input"
             value=""
-            id="name"
+            id="name_edit"
             type="text"
             {...formik.getFieldProps('name')}
           />
@@ -49,7 +69,7 @@ function EditProfile() {
           <input
             className="form-input"
             value=""
-            id="email_reg"
+            id="email_edit"
             type="email"
             {...formik.getFieldProps('email')}
           />
@@ -57,41 +77,16 @@ function EditProfile() {
             <div>{formik.errors.email}</div>
           ) : null}
 
-          <h3>Password</h3>
-          <input
-            className="form-input"
-            value=""
-            id="password_reg"
-            type="password"
-            {...formik.getFieldProps('password')}
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
-          ) : null}
-
-          <h3>Confirm password</h3>
-          <input
-            className="form-input"
-            value=""
-            id="confirmPassword"
-            type="password"
-            {...formik.getFieldProps('confirmPassword')}
-          />
-          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-            <div>{formik.errors.confirmPassword}</div>
-          ) : null}
           <br />
         </div>
-        <button type="submit" id="oneR" className="modal-button">
+        <button type="submit" id="oneEdit" className="modal-button">
           Submit
         </button>
         <button
           type="button"
-          id="twoR"
+          id="twoEdit"
           className="modal-button"
-          onClick={() => {
-            formik.resetForm();
-          }}
+          onClick={() => formik.resetForm()}
         >
           Reset form
         </button>
