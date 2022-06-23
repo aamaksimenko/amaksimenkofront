@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -32,7 +33,7 @@ function UserPage() {
     if (isAccess) {
       dispatch(userData());
     }
-  }, [dispatch, isNews, isEdit]);
+  }, [dispatch, isAccess, isNews, isEdit]);
 
   if (!isAccess) {
     return <Loader />;
@@ -41,7 +42,7 @@ function UserPage() {
   return (
     <div className="user-page">
       <div className="user-profile">
-        <Card fullwidth="true">
+        <Card fullwidth="true" sx={{ display: 'flex' }}>
           <CardMedia
             sx={{ maxWidth: 140 }}
             component="img"
@@ -49,28 +50,33 @@ function UserPage() {
             image=""
             alt="User avatar"
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {(edit.name) ? edit.name : data.user?.name}
-            </Typography>
-            <Typography gutterBottom variant="h5" component="div">
-              {(edit.email) ? edit.email : data.user?.email}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small" onClick={() => setModalEditProfile(true)}>
-              Edit Profile
-            </Button>
-            <Button size="small" onClick={() => setModalAddNews(true)}>
-              Add news
-            </Button>
-          </CardActions>
-          <AddNews isAddNews={isAddNews} setAddNews={setModalAddNews} />
-          <EditProfile isEditProfile={isEditProfile} setEditProfile={setModalEditProfile} />
+          <Box>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {(edit.name) ? edit.name : data.user?.name}
+              </Typography>
+              <Typography gutterBottom variant="h5" component="div">
+                {(edit.email) ? edit.email : data.user?.email}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" onClick={() => setModalEditProfile(true)}>
+                Edit Profile
+              </Button>
+              <Button size="small" onClick={() => setModalAddNews(true)}>
+                Add news
+              </Button>
+            </CardActions>
+            <AddNews isAddNews={isAddNews} setAddNews={setModalAddNews} />
+            <EditProfile isEditProfile={isEditProfile} setEditProfile={setModalEditProfile} />
+          </Box>
+
         </Card>
       </div>
       <div className="userNews">
-        <h2>User News</h2>
+        <Typography component="div" variant="h2">
+          User News
+        </Typography>
         <div className="userNews__content">
           {data.news?.length ? (
             data.news?.map((post) => (

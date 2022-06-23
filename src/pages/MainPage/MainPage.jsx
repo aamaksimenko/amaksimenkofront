@@ -1,6 +1,8 @@
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Typography from '@mui/material/Typography';
+
 import OneNews from '../../components/OneNews/OneNews';
 import Loader from '../../components/Loader/Loader';
 import { getNews } from '../../redux/actions/actionCreator';
@@ -25,7 +27,7 @@ function MainPage() {
 
   return (
     <div className="main-page">
-      {news.map((post) => (
+      {news.length ? (news.map((post) => (
         <OneNews
           key={post.id}
           title={post.title}
@@ -34,7 +36,11 @@ function MainPage() {
           author={post.author}
           CreatedAt={post.created_at}
         />
-      ))}
+      ))) : (
+        <Typography component="div" variant="h1">
+          No news
+        </Typography>
+      )}
     </div>
   );
 }
