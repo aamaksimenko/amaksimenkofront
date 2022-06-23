@@ -21,8 +21,8 @@ export const initialValuesAddNews = {
 };
 
 export const initialValuesEdit = {
-  name: user.name,
-  email: user.email,
+  name: user?.name,
+  email: user?.email,
 };
 
 export const yupVariable = {

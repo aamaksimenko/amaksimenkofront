@@ -5,7 +5,7 @@ import {
 } from '../constants';
 
 export const initialEditProfile = {
-  news: null,
+  user: [],
   isLoading: false,
   isAccess: Boolean(localStorage.getItem('token')),
   error: null,
@@ -16,7 +16,7 @@ function editProfileReducer(state = initialEditProfile, action = {}) {
     case EDIT_PROFILE:
       return {
         ...state,
-        news: action.payload,
+        user: action.payload,
         isLoading: true,
         isAccess: false,
         error: null,
@@ -24,7 +24,7 @@ function editProfileReducer(state = initialEditProfile, action = {}) {
     case EDIT_PROFILE_SUCCESS:
       return {
         ...state,
-        news: action.payload,
+        user: action.payload,
         isLoading: false,
         isAccess: true,
         error: null,

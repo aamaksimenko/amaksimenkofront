@@ -1,7 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 
 import { editProfile } from '../../redux/actions/actionCreator';
@@ -9,36 +8,33 @@ import { editProfile } from '../../redux/actions/actionCreator';
 import {
   initialValuesEdit,
   validationSchemaEdit,
-} from '../constants';
+} from '../../components/constants';
 
-function EditProfile() {
+function EditProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isAccess = useSelector((state) => state.editProfileReducer.isAccess);
-  console.log(isAccess);
 
   const submitEdit = useCallback(
-
     (values) => {
       let editUser;
       try {
         editUser = JSON.parse(localStorage.getItem('user'));
         if (!editUser.name || !editUser.id) {
           throw new SyntaxError('User data change error. Try again later');
+        } else if (isAccess) {
+          const edit = {
+            ...values,
+            image: false,
+            user_id: editUser.id,
+          };
+          dispatch(editProfile(edit));
+          navigate('/user_page');
         }
       } catch (error) {
         alert(error.message);
         localStorage.clear();
-        navigate('/user_page');
-      }
-      if (isAccess) {
-        const edit = {
-          ...values,
-          image: false,
-          user_id: editUser.id,
-        };
-        dispatch(editProfile(edit));
         navigate('/user_page');
       }
     },
@@ -80,11 +76,11 @@ function EditProfile() {
           <br />
         </div>
         <button type="submit" id="oneEdit" className="modal-button">
-          Submit
+          Edit Profile
         </button>
         <button
           type="button"
-          id="twoEdit"
+          id="resetEdit"
           className="modal-button"
           onClick={() => formik.resetForm()}
         >
@@ -95,4 +91,4 @@ function EditProfile() {
   );
 }
 
-export default memo(EditProfile);
+export default memo(EditProfilePage);

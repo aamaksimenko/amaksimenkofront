@@ -6,7 +6,7 @@ import { Container } from '@mui/material';
 import Header from './components/Header/Header';
 import UserPage from './pages/UserPage/UserPage';
 import MainPage from './pages/MainPage/MainPage';
-import EditProfile from './components/EditProfile/EditProfile';
+import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/user_page" element={<UserPage />} />
-          <Route path="/edit_profile" element={<EditProfile />} />
+          <Route path="/edit_profile" element={<EditProfilePage />} />
         </Routes>
       </Container>
     </BrowserRouter>

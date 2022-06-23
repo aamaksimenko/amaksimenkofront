@@ -4,18 +4,19 @@ import api from '../actions/api/api';
 import { EDIT_PROFILE } from '../constants';
 import { editProfileSuccess, editProfileFailure } from '../actions/actionCreator';
 
-function* addNews({ payload }) {
+function* editProfile({ payload }) {
   try {
     const editUser = JSON.parse(localStorage.getItem('user'));
-    const data = yield call(api.post, `/users/${editUser.id}`, payload);
+    const { data } = yield call(api.patch, `/users/${Number(editUser.id)}`, payload);
+    localStorage.setItem('user', JSON.stringify(data));
     yield put(editProfileSuccess(data));
   } catch (error) {
     yield put(editProfileFailure(error.message));
   }
 }
 
-function* listenerAddNewsSaga() {
-  yield takeEvery(EDIT_PROFILE, addNews);
+function* listenerEditUserSaga() {
+  yield takeEvery(EDIT_PROFILE, editProfile);
 }
 
-export default listenerAddNewsSaga;
+export default listenerEditUserSaga;

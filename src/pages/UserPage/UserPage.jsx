@@ -21,6 +21,7 @@ function UserPage() {
   const [isAddNews, setModalAddNews] = useState(false);
 
   const data = useSelector((state) => state.userData.data);
+  const edit = useSelector((state) => state.editProfileReducer.user);
   const isAccess = useSelector((state) => state.userReducer.isAccess);
 
   useEffect(() => {
@@ -46,10 +47,10 @@ function UserPage() {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {data.user?.name}
+              {(edit.name) ? edit.name : data.user?.name}
             </Typography>
             <Typography gutterBottom variant="h5" component="div">
-              {data.user?.email}
+              {(edit.email) ? edit.email : data.user?.email}
             </Typography>
           </CardContent>
           <CardActions>
