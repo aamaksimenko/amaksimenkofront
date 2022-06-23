@@ -1,36 +1,34 @@
 import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { bool, func } from 'prop-types';
 import { useFormik } from 'formik';
 
 import { editProfile } from '../../redux/actions/actionCreator';
+import Modal from '../Modal/Modal';
+import { validationSchemaEdit } from '../constants';
 
-import {
-  initialValuesEdit,
-  validationSchemaEdit,
-} from '../../components/constants';
-
-function EditProfilePage() {
+function EditProfile({ isEditProfile, setEditProfile }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isAccess = useSelector((state) => state.editProfileReducer.isAccess);
+  const isEdit = useSelector((state) => state.editProfileReducer.error);
+  const userData = useSelector((state) => state.userData.data.user);
 
   const submitEdit = useCallback(
-    (values) => {
-      let editUser;
+    (values, { resetForm }) => {
       try {
-        editUser = JSON.parse(localStorage.getItem('user'));
-        if (!editUser.name || !editUser.id) {
-          throw new SyntaxError('User data change error. Try again later');
+        if (isEdit) {
+          throw new SyntaxError(`${isEdit}`);
         } else if (isAccess) {
           const edit = {
             ...values,
             image: false,
-            user_id: editUser.id,
           };
           dispatch(editProfile(edit));
-          navigate('/user_page');
+          resetForm({});
+          setEditProfile(false);
         }
       } catch (error) {
         alert(error.message);
@@ -40,14 +38,19 @@ function EditProfilePage() {
     },
     [dispatch],
   );
+  const initialValuesEdit = {
+    name: userData?.name,
+    email: userData?.email,
+  };
   const formik = useFormik({
     initialValues: initialValuesEdit,
     validationSchema: validationSchemaEdit,
     onSubmit: submitEdit,
   });
   return (
-    <div>
+    <Modal isActive={isEditProfile} setActive={setEditProfile}>
       <form onSubmit={formik.handleSubmit}>
+        <h2 className="modal-title">Edit profile</h2>
         <div className="form-div">
           <h3>Name</h3>
           <input
@@ -80,15 +83,32 @@ function EditProfilePage() {
         </button>
         <button
           type="button"
+          id="closeEdit"
+          className="modal-button"
+          onClick={() => setEditProfile(false)}
+        >
+          Close
+        </button>
+        <button
+          type="button"
           id="resetEdit"
           className="modal-button"
           onClick={() => formik.resetForm()}
         >
-          Reset form
+          Reset
         </button>
       </form>
-    </div>
+    </Modal>
   );
 }
 
-export default memo(EditProfilePage);
+EditProfile.defaultProps = {
+  isEditProfile: false,
+  setEditProfile: null,
+};
+EditProfile.propTypes = {
+  isEditProfile: bool,
+  setEditProfile: func,
+};
+
+export default memo(EditProfile);

@@ -1,7 +1,7 @@
 .main-page{
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: space-evenly;
   padding-bottom: 20px;
 }
 

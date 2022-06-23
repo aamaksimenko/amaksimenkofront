@@ -12,36 +12,30 @@ function AddNews({ isAddNews, setAddNews }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const isAccess = useSelector((state) => state.userReducer.isAccess);
+  const isNews = useSelector((state) => state.addNewsReducer.error);
 
   const submitAddNews = useCallback(
     (values, { resetForm }) => {
-      let user;
       try {
-        user = JSON.parse(localStorage.getItem('user'));
-        if (!user.name || !user.id) {
-          throw new SyntaxError('Authorization error! Please, repeat the authorization procedure');
+        if (isNews) {
+          throw new Error(`${isNews}`);
         }
+        const addingNews = {
+          ...values,
+          image: false,
+        };
+        dispatch(addNews(addingNews));
+        resetForm(initialValuesAddNews);
+        dispatch(userData());
+        setAddNews(false);
       } catch (error) {
         alert(error.message);
         localStorage.clear();
         dispatch(logOutUser());
         navigate('/');
       }
-      if (isAccess) {
-        const addingNews = {
-          ...values,
-          image: false,
-          author: user.name,
-          user_id: user.id,
-        };
-        dispatch(addNews(addingNews));
-        resetForm(initialValuesAddNews);
-        dispatch(userData());
-        setAddNews(false);
-      }
     },
-    [dispatch, isAccess],
+    [dispatch],
   );
 
   const formik = useFormik({

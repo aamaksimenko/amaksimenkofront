@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -12,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import Loader from '../../components/Loader/Loader';
 import OneNews from '../../components/OneNews/OneNews';
 import AddNews from '../../components/AddNews/AddNews';
+import EditProfile from '../../components/EditProfile/EditProfile';
+
 import { userData } from '../../redux/actions/actionCreator';
 
 import './UserPage.css';
@@ -19,16 +20,19 @@ import './UserPage.css';
 function UserPage() {
   const dispatch = useDispatch();
   const [isAddNews, setModalAddNews] = useState(false);
+  const [isEditProfile, setModalEditProfile] = useState(false);
 
   const data = useSelector((state) => state.userData.data);
   const edit = useSelector((state) => state.editProfileReducer.user);
   const isAccess = useSelector((state) => state.userReducer.isAccess);
+  const isEdit = useSelector((state) => state.editProfileReducer.isAccess);
+  const isNews = useSelector((state) => state.addNewsReducer.isAccess);
 
   useEffect(() => {
     if (isAccess) {
       dispatch(userData());
     }
-  }, [dispatch, isAccess]);
+  }, [dispatch, isNews, isEdit]);
 
   if (!isAccess) {
     return <Loader />;
@@ -54,14 +58,15 @@ function UserPage() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">
-              <Link to="/edit_profile">Edit Profile</Link>
+            <Button size="small" onClick={() => setModalEditProfile(true)}>
+              Edit Profile
             </Button>
             <Button size="small" onClick={() => setModalAddNews(true)}>
               Add news
             </Button>
           </CardActions>
           <AddNews isAddNews={isAddNews} setAddNews={setModalAddNews} />
+          <EditProfile isEditProfile={isEditProfile} setEditProfile={setModalEditProfile} />
         </Card>
       </div>
       <div className="userNews">
