@@ -20,11 +20,16 @@ function AddNews({ isAddNews, setAddNews }) {
         if (isNews) {
           throw new Error(`${isNews}`);
         }
-        const addingNews = {
-          ...values,
-          image: false,
-        };
-        dispatch(addNews(addingNews));
+        const formData = new FormData();
+        formData.append('title', values.title);
+        formData.append('article', values.article);
+        formData.append('tag', values.tag);
+        formData.append('image', false);
+        // const addingNews = {
+        //   ...values,
+        //   image: false,
+        // };
+        dispatch(addNews(formData));
         resetForm(initialValuesAddNews);
         dispatch(userData());
         setAddNews(false);

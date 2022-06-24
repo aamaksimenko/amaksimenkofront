@@ -1,12 +1,14 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 
-import api from '../actions/api/api';
+// import api from '../actions/api/api';
+import { userData } from '../actions/api/api';
 import { USER_DATA } from '../constants';
 import { userDataSuccess, userDataFailure } from '../actions/actionCreator';
 
 function* getUserData() {
   try {
-    const { data } = yield call(api.get, '/profile');
+    // const { data } = yield call(api.get, '/profile');
+    const { data } = yield userData();
     yield put(userDataSuccess(data));
   } catch (error) {
     yield put(userDataFailure(error));

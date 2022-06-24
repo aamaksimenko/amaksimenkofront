@@ -1,12 +1,14 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 
-import api from '../actions/api/api';
+// import api from '../actions/api/api';
+import { loginUser } from '../actions/api/api';
 import { POST_LOGIN } from '../constants';
 import { postLogInSuccess, postLogInFailure } from '../actions/actionCreator';
 
 function* logInUser({ payload }) {
   try {
-    const data = yield call(api.post, '/users/sign_in', { user: payload });
+    // const data = yield call(api.post, '/users/sign_in', { user: payload });
+    const data = yield loginUser(payload);
     yield put(postLogInSuccess(data.data));
     localStorage.setItem('user', JSON.stringify(data.data.user));
     localStorage.setItem('token', data.headers.authorization);
